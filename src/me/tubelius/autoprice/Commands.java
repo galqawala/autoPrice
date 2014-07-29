@@ -22,14 +22,14 @@ import org.bukkit.inventory.ItemStack;
 
 public class Commands implements CommandExecutor {
     //Pointer to the class calling this class     
-    private AutoPrice Plugin;        
-    public Commands(AutoPrice Plugin) { this.Plugin = Plugin; }
+    private AutoPrice plugin;        
+    public Commands(AutoPrice plugin) { this.plugin = plugin; }
  
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (label.equalsIgnoreCase("AP") ) {                    //The main command
             if (args.length <= 0) {                             //No arguments at all
-                Plugin.respondToSender(sender,Plugin.GetData.getHelpMessage(sender) );    //Throw the help to the command sender
+                plugin.respondToSender(sender,plugin.getData.getHelpMessage(sender) );    //Throw the help to the command sender
             } else if (args[0].equalsIgnoreCase("shop") ) {     //First parameter is "shop"
                 handleShop(sender,args);                        //Process the shop command
             } else if (args[0].equalsIgnoreCase("select") ) {   //First parameter is "select"
@@ -45,184 +45,184 @@ public class Commands implements CommandExecutor {
             } else if (args[0].equalsIgnoreCase("save") ) {     //First parameter is "save"
                 handleSave(sender);                             //Call for a function save the configuration file
             } else {    //First parameter is incorrect
-                Plugin.respondToSender(sender,Plugin.chatColorError+
-                        String.format(Plugin.GetData.getPlayerMessage("incorrectArgument", sender.getName())
-                                ,   args[0],   "\n"+Plugin.GetData.getHelpMessage(sender)    )
+                plugin.respondToSender(sender,plugin.chatColorError+
+                        String.format(plugin.getData.getPlayerMessage("incorrectArgument", sender.getName())
+                                ,   args[0],   "\n"+plugin.getData.getHelpMessage(sender)    )
                 );
             }
         }
-        Plugin.saveConfig();
+        plugin.saveConfig();
         return true;            //Completed successfully
     }
     
     private void setActiveShop(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {  //Sender of the command is a player
-            Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("ingameCmdOnly",sender.getName()));
+            plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName()));
             return;
         }
         //List shops or select active shop
         if (args.length == 1) { //No arguments for this command --> list shops
             //loop all shops
-            Plugin.respondToSender(sender,
-                    String.format(Plugin.GetData.getPlayerMessage("shops", sender.getName()), Plugin.GetData.getAvailableShops(sender)) );
+            plugin.respondToSender(sender,
+                    String.format(plugin.getData.getPlayerMessage("shops", sender.getName()), plugin.getData.getAvailableShops(sender)) );
         } else if (args.length == 2) {  //Shop named --> try selecting it
-            if (!Plugin.getConfig().isConfigurationSection("shops."+args[1]) ) {
-                ChatColor chatColorCommand  = ChatColor.getByChar(Plugin.getConfig().getString("colors.command","2") );
-                Plugin.respondToSender(sender,Plugin.chatColorError+
-                        String.format(Plugin.GetData.getPlayerMessage("invalidShop", sender.getName()),args[1],chatColorCommand+"/ap select"));
+            if (!plugin.getConfig().isConfigurationSection("shops."+args[1]) ) {
+                ChatColor chatColorCommand  = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2") );
+                plugin.respondToSender(sender,plugin.chatColorError+
+                        String.format(plugin.getData.getPlayerMessage("invalidShop", sender.getName()),args[1],chatColorCommand+"/ap select"));
             } else if (!AutoPrice.permission.has(sender, "autoprice.shops."+args[1]) ) {    //No permission
-                Plugin.respondToSender(sender,Plugin.chatColorError+
-                        String.format(Plugin.GetData.getPlayerMessage("noShopAccess", sender.getName()),args[1]));
+                plugin.respondToSender(sender,plugin.chatColorError+
+                        String.format(plugin.getData.getPlayerMessage("noShopAccess", sender.getName()),args[1]));
             } else {    //All OK --> select it
-                Plugin.getConfig().set("players."+sender.getName()+".shopName",args[1]);
-                Plugin.respondToSender(sender, String.format(Plugin.GetData.getPlayerMessage("selectedShop", sender.getName()),args[1]) );
+                plugin.getConfig().set("players."+sender.getName()+".shopName",args[1]);
+                plugin.respondToSender(sender, String.format(plugin.getData.getPlayerMessage("selectedShop", sender.getName()),args[1]) );
             }
         } else {  //Invalid arguments
-            ChatColor chatColorCommand      = ChatColor.getByChar(Plugin.getConfig().getString("colors.command","2") );
-            ChatColor chatColorParameter    = ChatColor.getByChar(Plugin.getConfig().getString("colors.parameter","b") );
-            Plugin.respondToSender(sender,Plugin.chatColorError+String.format(Plugin.GetData.getPlayerMessage("invalidArguments"
+            ChatColor chatColorCommand      = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2") );
+            ChatColor chatColorParameter    = ChatColor.getByChar(plugin.getConfig().getString("colors.parameter","b") );
+            plugin.respondToSender(sender,plugin.chatColorError+String.format(plugin.getData.getPlayerMessage("invalidArguments"
                     , sender.getName()),args[0],
-                    chatColorCommand+"/ap select"+Plugin.chatColorError+"; "
-                    +chatColorCommand+"/ap select "+chatColorParameter+"shopname"+Plugin.chatColorError));
+                    chatColorCommand+"/ap select"+plugin.chatColorError+"; "
+                    +chatColorCommand+"/ap select "+chatColorParameter+"shopname"+plugin.chatColorError));
         }
     }
 
     public void handleName(CommandSender sender, String[] args) {
         if (sender instanceof Player) {     //Sender of the command is a player
             //Get colors
-            ChatColor   chatColorCommand    = ChatColor.getByChar(Plugin.getConfig().getString("colors.command","2") );
-            ChatColor   chatColorParameter    = ChatColor.getByChar(Plugin.getConfig().getString("colors.parameter","b") );
+            ChatColor   chatColorCommand    = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2") );
+            ChatColor   chatColorParameter    = ChatColor.getByChar(plugin.getConfig().getString("colors.parameter","b") );
             //handle the command to rename a material
             if (!AutoPrice.permission.isEnabled() ) {    //Vault's plugin.permission hook is not enabled
-                Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("noPermsCmdDisabled", sender.getName())); 
+                plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("noPermsCmdDisabled", sender.getName())); 
             } else if (!AutoPrice.permission.has(sender, "autoprice.rename") ) {    //plugin.permission missing
-                Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("permission", sender.getName()));
+                plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("permission", sender.getName()));
             } else if (args.length != 2) { //Argument count is not 2
-                Plugin.respondToSender(sender,Plugin.chatColorError+String.format(Plugin.GetData.getPlayerMessage("invalidArguments"
+                plugin.respondToSender(sender,plugin.chatColorError+String.format(plugin.getData.getPlayerMessage("invalidArguments"
                                 , sender.getName()),args[0],chatColorCommand+"/AP name "+chatColorParameter+"NewName"));
             } else if (args[1].contains(".") ) {
-                Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("noDot", sender.getName()));
+                plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("noDot", sender.getName()));
             } else {
                 ItemStack stackInHand = ((HumanEntity) sender).getItemInHand().clone();
                 if (stackInHand.getAmount() <= 0) {
-                    Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("holdStack",sender.getName()));
+                    plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("holdStack",sender.getName()));
                     return;
                 }
-                String shopName = Plugin.GetData.getShopForPlayer((HumanEntity) sender);
-                String oldMaterialPath = Plugin.Configuration.getStackConfigPath(stackInHand, shopName);
+                String shopName = plugin.getData.getShopForPlayer((HumanEntity) sender);
+                String oldMaterialPath = plugin.configuration.getStackConfigPath(stackInHand, shopName);
                 //Copy to new location
-                Plugin.Configuration.moveConfigNode(oldMaterialPath, "shops."+shopName+".materials."+args[1], false, true);
-                Plugin.respondToSender(sender,
-                    Plugin.chatColorError+String.format(
-                        Plugin.GetData.getPlayerMessage("renamed", sender.getName()) , oldMaterialPath.split("\\.")[3] , args[1]
+                plugin.configuration.moveConfigNode(oldMaterialPath, "shops."+shopName+".materials."+args[1], false, true);
+                plugin.respondToSender(sender,
+                    plugin.chatColorError+String.format(
+                        plugin.getData.getPlayerMessage("renamed", sender.getName()) , oldMaterialPath.split("\\.")[3] , args[1]
                     )
                 );
             }
-        } else { Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("ingameCmdOnly",sender.getName())); }
+        } else { plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName())); }
     }
     
     public void handleReload(CommandSender sender) {
         //handle the command to reload config
         if (!AutoPrice.permission.isEnabled() ) {    //Vault's plugin.permission hook is not enabled
-            Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("noPermsCmdDisabled",sender.getName()));
+            plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("noPermsCmdDisabled",sender.getName()));
             return;    //Quit, can't access permissions
         }
         if (!AutoPrice.permission.has(sender, "autoprice.reload") ) {    //autoprice.reload permission missing
-            Plugin.respondToSender(sender,
-                    Plugin.chatColorError+String.format(Plugin.GetData.getPlayerMessage("permission",sender.getName()), "autoprice.reload")
+            plugin.respondToSender(sender,
+                    plugin.chatColorError+String.format(plugin.getData.getPlayerMessage("permission",sender.getName()), "autoprice.reload")
             );
             return;    //No permission --> quit
         }
-        Plugin.reloadConfig();
-        Plugin.respondToSender(sender, Plugin.GetData.getPlayerMessage("configReloaded",sender.getName()) );
+        plugin.reloadConfig();
+        plugin.respondToSender(sender, plugin.getData.getPlayerMessage("configReloaded",sender.getName()) );
     }
     
     public void handleSave(CommandSender sender) {
         //handle the command to save configuration
         if (!AutoPrice.permission.isEnabled() ) {    //Vault's permission hook is not enabled
-            Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("noPermsCmdDisabled",sender.getName()));
+            plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("noPermsCmdDisabled",sender.getName()));
             return;    //Quit, can't access permissions
         }
         if (!AutoPrice.permission.has(sender, "autoprice.save") ) {    //autoprice.save permission missing
-            Plugin.respondToSender(sender,
-                    Plugin.chatColorError+String.format(Plugin.GetData.getPlayerMessage("permission",sender.getName()), "autoprice.save")
+            plugin.respondToSender(sender,
+                    plugin.chatColorError+String.format(plugin.getData.getPlayerMessage("permission",sender.getName()), "autoprice.save")
             );
             return;    //No permission --> quit
         }
-        Plugin.saveConfig();
-        Plugin.respondToSender(sender, Plugin.GetData.getPlayerMessage("configSaved",sender.getName()) );
+        plugin.saveConfig();
+        plugin.respondToSender(sender, plugin.getData.getPlayerMessage("configSaved",sender.getName()) );
     }
     
     public void setItemTradability(CommandSender sender, String[] args) {
         if (sender instanceof Player) {    //Sender of the command is a player
             ItemStack stackInHand = ((HumanEntity) sender).getItemInHand().clone();
             if (stackInHand.getAmount() <= 0) {
-                Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("holdStack",sender.getName())); return;
+                plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("holdStack",sender.getName())); return;
             }
-            String shopName    = Plugin.GetData.getShopForPlayer((HumanEntity) sender);
+            String shopName    = plugin.getData.getShopForPlayer((HumanEntity) sender);
             if (args.length == 1) {        //Got one argument as we should
                 if (args[0].equalsIgnoreCase("enable") ) {
                     if (AutoPrice.permission.has(sender, "autoprice.enableItems") ) {
                         enableMaterial(stackInHand, shopName, sender);
                     } else {
-                        Plugin.respondToSender(sender,
-                                Plugin.chatColorError+String.format(
-                                        Plugin.GetData.getPlayerMessage("permission",sender.getName()) , "autoprice.enableItems")   );
+                        plugin.respondToSender(sender,
+                                plugin.chatColorError+String.format(
+                                        plugin.getData.getPlayerMessage("permission",sender.getName()) , "autoprice.enableItems")   );
                     }
                 } else if (args[0].equalsIgnoreCase("disable") ) {
                     disableMaterial(stackInHand, shopName, sender);
                 }
             } else {
-                Plugin.respondToSender(sender,Plugin.chatColorError+String.format(Plugin.GetData.getPlayerMessage("invalidArguments"
-                        , sender.getName()),args[0],Plugin.GetData.getHelpMessage(sender)));
+                plugin.respondToSender(sender,plugin.chatColorError+String.format(plugin.getData.getPlayerMessage("invalidArguments"
+                        , sender.getName()),args[0],plugin.getData.getHelpMessage(sender)));
             }
         } else {
-            Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("ingameCmdOnly",sender.getName()));
+            plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName()));
         }
     }
     
     private void enableMaterial(ItemStack stackInHand, String shopName, CommandSender sender) {
         //Enable sub item
-        String materialConfigPath = Plugin.Configuration.getStackConfigPath(stackInHand, shopName);
+        String materialConfigPath = plugin.configuration.getStackConfigPath(stackInHand, shopName);
         String materialName;
         if (materialConfigPath != null) {
-            Plugin.getConfig().set(Plugin.Configuration.getStackConfigPath(stackInHand, shopName)+".tradable",true);
-            materialName = Plugin.GetData.getInternalMaterialName(stackInHand, shopName);  //stackInHand.getType().name();
+            plugin.getConfig().set(plugin.configuration.getStackConfigPath(stackInHand, shopName)+".tradable",true);
+            materialName = plugin.getData.getInternalMaterialName(stackInHand, shopName);  //stackInHand.getType().name();
         } else {
-            materialName = Plugin.Configuration.createMaterialConfiguration(stackInHand,shopName);
+            materialName = plugin.configuration.createMaterialConfiguration(stackInHand,shopName);
         }
         
         //Message player
-        Plugin.respondToSender(sender,String.format( Plugin.GetData.getPlayerMessage("materialEnabled",sender.getName()) ,materialName, shopName));
+        plugin.respondToSender(sender,String.format( plugin.getData.getPlayerMessage("materialEnabled",sender.getName()) ,materialName, shopName));
     }
     
     private void disableMaterial(ItemStack stackInHand, String shopName, CommandSender sender) {
         if (AutoPrice.permission.has(sender, "autoprice.disableItems") ) {
             //Disable sub item
-            String materialPath = Plugin.Configuration.getStackConfigPath(stackInHand, shopName);
+            String materialPath = plugin.configuration.getStackConfigPath(stackInHand, shopName);
             if (materialPath != null) {
-                Plugin.getConfig().set(materialPath+".tradable",false);
-                Plugin.respondToSender(sender,String.format( Plugin.GetData.getPlayerMessage("materialDisabled",sender.getName()) 
+                plugin.getConfig().set(materialPath+".tradable",false);
+                plugin.respondToSender(sender,String.format( plugin.getData.getPlayerMessage("materialDisabled",sender.getName()) 
                         ,   materialPath.split("\\.")[3] ,  shopName));
             } else {
-                Plugin.respondToSender(sender, Plugin.GetData.getPlayerMessage("noSuchItem",sender.getName()) );
+                plugin.respondToSender(sender, plugin.getData.getPlayerMessage("noSuchItem",sender.getName()) );
             }
         } else {
-            Plugin.respondToSender(sender,  Plugin.chatColorError+String.format(
-                    Plugin.GetData.getPlayerMessage("permission",sender.getName()) , "autoprice.disableItems")  );
+            plugin.respondToSender(sender,  plugin.chatColorError+String.format(
+                    plugin.getData.getPlayerMessage("permission",sender.getName()) , "autoprice.disableItems")  );
         }
     }
 
     public void handleShop(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {  //Sender of the command is a player
-            Plugin.respondToSender(sender,Plugin.chatColorError+Plugin.GetData.getPlayerMessage("ingameCmdOnly",sender.getName()));
+            plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName()));
             return;
         }
-        String shopName         = Plugin.GetData.getShopForPlayer((HumanEntity) sender);
+        String shopName         = plugin.getData.getShopForPlayer((HumanEntity) sender);
         Inventory shopInventory = Bukkit.createInventory((InventoryHolder) sender, 6*9, "AutoPrice shop: "+shopName);
         ((HumanEntity) sender).openInventory(shopInventory);
-        Plugin.Trade.loadShopPage(sender,shopInventory,"1",shopName);
-        Plugin.Trade.setShopInfoOnStacks(shopInventory,true,true,shopName,sender);
+        plugin.trade.loadShopPage(sender,shopInventory,"1",shopName);
+        plugin.trade.setShopInfoOnStacks(shopInventory,true,true,shopName,sender);
     }
     
 }

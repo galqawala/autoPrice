@@ -15,19 +15,19 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class Configuration {
     //Pointer to the class calling this class
-    private AutoPrice Plugin;    
-    public Configuration(AutoPrice Plugin) {
-        this.Plugin = Plugin;
+    private AutoPrice plugin;    
+    public Configuration(AutoPrice plugin) {
+        this.plugin = plugin;
     }
 
     void upgradeConfig() {
-        if (!Plugin.getDescription().getVersion().equalsIgnoreCase(Plugin.getConfig().getString("configVersion",""))) {
+        if (!plugin.getDescription().getVersion().equalsIgnoreCase(plugin.getConfig().getString("configVersion",""))) {
             //Configuration is from earlier version --> upgrade it
-            Plugin.logger.info(Plugin.GetData.getMessagePrefix(false)+Plugin.GetData.getConsoleMessage("upgradingConfigFrom")+" "
-                    +Plugin.getConfig().getString("configVersion",""));
-            Plugin.getConfig().set("shopLastPageNumber",null);
-            Plugin.getConfig().set("defaultStockAmountMinObjective",null);
-            Plugin.getConfig().set("players",null);        //There used to be temporary data here in old version
+            plugin.logger.info(plugin.getData.getMessagePrefix(false)+plugin.getData.getConsoleMessage("upgradingConfigFrom")+" "
+                    +plugin.getConfig().getString("configVersion",""));
+            plugin.getConfig().set("shopLastPageNumber",null);
+            plugin.getConfig().set("defaultStockAmountMinObjective",null);
+            plugin.getConfig().set("players",null);        //There used to be temporary data here in old version
             moveConfigNode("materials","shops.default.materials",false,true);               //move
             moveConfigNodesOnAllLevels("priceMin","salesPriceMin",false,false);             //copy
             moveConfigNodesOnAllLevels("priceMin","purchasePriceMin",false,true);           //move
@@ -36,15 +36,15 @@ public class Configuration {
             moveConfigNodesOnAllLevels("salesPriceMin","salesPrice.minPrice",false,true);   //move
             moveConfigNodesOnAllLevels("salesPriceMax","salesPrice.maxPrice",false,true);   //move
             upgradeSubMaterialConfig();
-            Plugin.getConfig().set("temporary",null);
+            plugin.getConfig().set("temporary",null);
             moveConfigNode("ticksBetweenPriceUpdates","salesPrice.updateIntervalTicks",false,true);                         //move
             moveConfigNode("initialBaseSalesPrice","salesPrice.price",false,true);                                          //move
             moveConfigNode("minimumPlayersRequiredForPriceChange","salesPrice.playersRequiredForPriceChange",false,true);   //move
             moveConfigNode("priceChecksToSkipAfterTrades","salesPrice.priceChecksToSkipAfterTrades",false,true);            //move
             moveConfigNodesOnAllLevels("baseSalesPriceForPlayer","salesPrice.price",false,true);                            //move
-            Plugin.getConfig().set("configVersion",Plugin.getDescription().getVersion()); //Update configuration version
-            Plugin.logger.info(Plugin.GetData.getMessagePrefix(false)+Plugin.GetData.getConsoleMessage("upgradedConfig")+" "+Plugin.getConfig().getString("configVersion",""));
-            Plugin.saveConfig(); //Save the configuration file
+            plugin.getConfig().set("configVersion",plugin.getDescription().getVersion()); //Update configuration version
+            plugin.logger.info(plugin.getData.getMessagePrefix(false)+plugin.getData.getConsoleMessage("upgradedConfig")+" "+plugin.getConfig().getString("configVersion",""));
+            plugin.saveConfig(); //Save the configuration file
         }
     }
 
@@ -56,23 +56,23 @@ public class Configuration {
         }
         if (pathNew != null) {
             //new path missing, don't create anything
-            if (overwrite || Plugin.getConfig().get(pathNew,null) == null) {
+            if (overwrite || plugin.getConfig().get(pathNew,null) == null) {
                 //overwriting is allowed of new node is missing --> save
-                Plugin.getConfig().set(pathNew,Plugin.getConfig().get(pathOld));
+                plugin.getConfig().set(pathNew,plugin.getConfig().get(pathOld));
             }
         }
-        if (deleteOld) { Plugin.getConfig().set(pathOld, null); }  //Delete the old node?
+        if (deleteOld) { plugin.getConfig().set(pathOld, null); }  //Delete the old node?
     }
     public void moveConfigNodesInAllMaterials(String pathOldRelative, String pathNewRelative, boolean overwrite, boolean deleteOld) {
-        for (String shopName : Plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
-            for (String materialNode : Plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
+        for (String shopName : plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
+            for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
                 String materialPath = "shops."+shopName+".materials."+materialNode;
                 moveConfigNode(materialPath+"."+pathOldRelative , materialPath+"."+pathNewRelative , overwrite , deleteOld);
             }
         }
     }
     public void moveConfigNodesInAllShops(String pathOldRelative, String pathNewRelative, boolean overwrite, boolean deleteOld) {
-        for (String shopName : Plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
+        for (String shopName : plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
             String shopNode = "shops."+shopName;
             moveConfigNode(shopNode+"."+pathOldRelative , shopNode+"."+pathNewRelative , overwrite , deleteOld);
         }
@@ -85,36 +85,36 @@ public class Configuration {
     
     
     private void upgradeSubMaterialConfig() {
-        for (String shopName : Plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
+        for (String shopName : plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
             //relocate material nodes
-            for (String materialNode : Plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
-                for (String subMaterial : Plugin.getConfig().getConfigurationSection("shops."+shopName+".materials."+materialNode).getKeys(false)) {
+            for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
+                for (String subMaterial : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials."+materialNode).getKeys(false)) {
                     if (NumberUtils.isNumber(subMaterial)) {
                         String oldMaterialPath = "shops."+shopName+".materials."+materialNode+"."+subMaterial;
-                        String newMaterialName = Plugin.getConfig().getString(oldMaterialPath+".name",materialNode);
+                        String newMaterialName = plugin.getConfig().getString(oldMaterialPath+".name",materialNode);
                         String newMaterialPath = "shops."+shopName+".materials."+newMaterialName;
                         int materialSuffix = 2;
-                        while (Plugin.getConfig().isString(newMaterialPath+".mainMaterial")) {
+                        while (plugin.getConfig().isString(newMaterialPath+".mainMaterial")) {
                             newMaterialPath = "shops."+shopName+".materials."+newMaterialName+materialSuffix; 
                             materialSuffix += 1;
                         }
-                        Plugin.getConfig().set(newMaterialPath , Plugin.getConfig().getConfigurationSection(oldMaterialPath));    //Copy to new location
-                        Plugin.getConfig().set(oldMaterialPath , null);                                                    //Remove old location
-                        Plugin.getConfig().set(newMaterialPath+".name" , null);                                    //Remove name node (it's in path now)
-                        Plugin.getConfig().set(newMaterialPath+".mainMaterial" , materialNode);                    //Add node (this info is no longer in path)
-                        Plugin.getConfig().set(newMaterialPath+".subMaterial" , Integer.parseInt(subMaterial));    //Add node (this info is no longer in path)
+                        plugin.getConfig().set(newMaterialPath , plugin.getConfig().getConfigurationSection(oldMaterialPath));    //Copy to new location
+                        plugin.getConfig().set(oldMaterialPath , null);                                                    //Remove old location
+                        plugin.getConfig().set(newMaterialPath+".name" , null);                                    //Remove name node (it's in path now)
+                        plugin.getConfig().set(newMaterialPath+".mainMaterial" , materialNode);                    //Add node (this info is no longer in path)
+                        plugin.getConfig().set(newMaterialPath+".subMaterial" , Integer.parseInt(subMaterial));    //Add node (this info is no longer in path)
                     }
                 }
             }
             //remove leftover material nodes
-            for (String materialNode : Plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
-                if (!Plugin.getConfig().isString("shops."+shopName+".materials."+materialNode+".mainMaterial")) {
-                    Plugin.getConfig().set("shops."+shopName+".materials."+materialNode , null);   //Remove left over node
+            for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
+                if (!plugin.getConfig().isString("shops."+shopName+".materials."+materialNode+".mainMaterial")) {
+                    plugin.getConfig().set("shops."+shopName+".materials."+materialNode , null);   //Remove left over node
                 }
             }
             //remove unsupported keys under materials
-            for (String materialNode : Plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
-                Plugin.getConfig().set("shops."+shopName+".materials."+materialNode+".stockAmountMinObjective",null); //No longer supported
+            for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
+                plugin.getConfig().set("shops."+shopName+".materials."+materialNode+".stockAmountMinObjective",null); //No longer supported
             }
         }
     }
@@ -125,16 +125,16 @@ public class Configuration {
         if (internalMaterialName == null) { internalMaterialName = stackInHand.getType().name(); }
         String newMaterialPath = "shops."+shopName+".materials."+internalMaterialName;
         int materialSuffix = 2;
-        while (Plugin.getConfig().isString(newMaterialPath+".mainMaterial") ) {
+        while (plugin.getConfig().isString(newMaterialPath+".mainMaterial") ) {
             internalMaterialName += materialSuffix;
             newMaterialPath = "shops."+shopName+".materials."+internalMaterialName; 
             materialSuffix += 1;
         }
         //main material
-        Plugin.getConfig().set(newMaterialPath+".mainMaterial" , stackInHand.getType().name() );
+        plugin.getConfig().set(newMaterialPath+".mainMaterial" , stackInHand.getType().name() );
         //sub material (if has)
         if (stackInHand.getType().getMaxDurability() == 0) {  //Material has sub materials instead of durability
-            Plugin.getConfig().set(newMaterialPath+".subMaterial" , stackInHand.getDurability() );
+            plugin.getConfig().set(newMaterialPath+".subMaterial" , stackInHand.getDurability() );
         }
         //item meta
         ItemMeta meta = stackInHand.getItemMeta();
@@ -146,16 +146,16 @@ public class Configuration {
         Iterator<Entry<Enchantment,Integer>> iter = enchantments.entrySet().iterator();
         while(iter.hasNext()){
             Entry<Enchantment,Integer> entry = iter.next();
-            Plugin.getConfig().set(newMaterialPath+".enchantments."+entry.getKey().getName(), entry.getValue() );
+            plugin.getConfig().set(newMaterialPath+".enchantments."+entry.getKey().getName(), entry.getValue() );
         }
         //tradability
-        Plugin.getConfig().set(newMaterialPath+".tradable" , true);
+        plugin.getConfig().set(newMaterialPath+".tradable" , true);
         return  internalMaterialName;   //return the internal name of the material created
     }
 
     private void saveItemStackMetaToConfig(String newMaterialPath, ItemMeta meta, ItemStack stackInHand) {
         //display name
-        Plugin.getConfig().set(newMaterialPath+".displayName", meta.getDisplayName() );
+        plugin.getConfig().set(newMaterialPath+".displayName", meta.getDisplayName() );
         //lores
         if (meta.hasLore() ) {
             List<String> lores = stackInHand.getItemMeta().getLore();
@@ -165,12 +165,12 @@ public class Configuration {
                     loresForConfig.add(lore);
                 }
             }
-            Plugin.getConfig().set(newMaterialPath+".lores", loresForConfig);
+            plugin.getConfig().set(newMaterialPath+".lores", loresForConfig);
         }
         if (meta instanceof LeatherArmorMeta) {
             //LeatherArmorMeta color
             LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta)stackInHand.getItemMeta();
-            Plugin.getConfig().set(newMaterialPath+".color" , leatherArmorMeta.getColor() );
+            plugin.getConfig().set(newMaterialPath+".color" , leatherArmorMeta.getColor() );
             stackInHand.setItemMeta(leatherArmorMeta);
         }
     }
@@ -178,14 +178,14 @@ public class Configuration {
     public String getStackConfigPath(ItemStack stack, String shopName) {
         //Get the configuration path where the data is stored for this Material or MaterialData
         //loop materials in configuration -> return matching material's path
-        for (String materialNode : Plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
+        for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
             String materialPath = "shops."+shopName+".materials."+materialNode;
-            if ( stack.getType().name().equalsIgnoreCase(Plugin.getConfig().getString(materialPath+".mainMaterial"))) {
+            if ( stack.getType().name().equalsIgnoreCase(plugin.getConfig().getString(materialPath+".mainMaterial"))) {
                 //main material matches -> item uses durability or sub material in durability value matches configuration 
                 if (stack.getType().getMaxDurability() > 0 || 
-                        stack.getDurability() == Plugin.getConfig().getInt(materialPath+".subMaterial")) {
+                        stack.getDurability() == plugin.getConfig().getInt(materialPath+".subMaterial")) {
                     //main&sub materials match -> check/match lores
-                    if (Plugin.GetData.loresMatch(materialPath,stack)) {
+                    if (plugin.getData.loresMatch(materialPath,stack)) {
                         return  materialPath;   //current material matches the stack, return the path of current material
                     }
                 }
@@ -196,17 +196,17 @@ public class Configuration {
     
     public double getMaterialConfigDouble(String shopName, String materialPath, String node) {
         return 
-            Plugin.getConfig().getDouble(materialPath+"."+node          //Primarily use material config
-            ,   Plugin.getConfig().getDouble("shops."+shopName+"."+node //If missing use shop config
-                ,   Plugin.getConfig().getDouble(node)                  //If missing use root (global default)
+            plugin.getConfig().getDouble(materialPath+"."+node          //Primarily use material config
+            ,   plugin.getConfig().getDouble("shops."+shopName+"."+node //If missing use shop config
+                ,   plugin.getConfig().getDouble(node)                  //If missing use root (global default)
                 )
             );
     }
     public int getMaterialConfigInt(String shopName, String materialPath, String node) {
         return 
-            Plugin.getConfig().getInt(materialPath+"."+node             //Primarily use material config
-            ,   Plugin.getConfig().getInt("shops."+shopName+"."+node    //If missing use shop config
-                ,   Plugin.getConfig().getInt(node)                     //If missing use root (global default)
+            plugin.getConfig().getInt(materialPath+"."+node             //Primarily use material config
+            ,   plugin.getConfig().getInt("shops."+shopName+"."+node    //If missing use shop config
+                ,   plugin.getConfig().getInt(node)                     //If missing use root (global default)
                 )
             );
     }
