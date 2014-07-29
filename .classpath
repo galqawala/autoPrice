@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="H:/FES_Test/plugins/Vault-1.4.1.jar"/>
+	<classpathentry kind="lib" path="H:/FESurvival_com/_stuff_/bukkit-1.7.10-R0.1-20140710.000649-3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

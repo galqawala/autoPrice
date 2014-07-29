@@ -1,0 +1,4110 @@
+configVersion: '4.070'
+colors:
+  command: 2
+  normal: f
+  parameter: b
+  plugin: 6
+  error: c
+decimalSeparatorASCII: 46
+groupingSeparatorASCII: 32
+displayCustomMaterialNameInShop: false
+minimumProfitPerUnit: 0.01
+postTradesToConsole: true
+purchasePriceMultiplier: 1.1
+salesPrice:
+  updateIntervalTicks: 2000
+  price: 0.01
+  minPrice: 0.01
+  maxPrice: 999.0
+  playersRequiredForPriceChange: 1
+  priceChecksToSkipAfterTrades: 36
+  increaseMultiplier: 1.0001
+  increaseValueMin: 0.01
+  increaseValueMax: 100.00
+purchasePriceMin: 0.01
+purchasePriceMax: 999.0
+consoleLanguage: english
+defaultPlayerLanguage: english
+shopItemsPerPage: 53
+optionsItemLocation: 53
+languages:
+  english:
+    economyMissing: No economy plugin found using Vault plugin! Shutting down AutoPrice...
+    permissionsMissing: No permission plugin found using Vault plugin. Some in-game commands have been disabled.
+    loaded: "Loaded %s v%s (Tuomo K\xe4m\xe4r\xe4inen / tubelius@gmail.com)"
+    help: 'Help: Open the shop: %s      List shops: %s      Select shop: %s'
+    incorrectArgument: 'Incorrect argument: %s! %s'
+    shops: 'You have access to following shops: %s'
+    invalidShop: 'No shop with name: %s. To list available shops use %s.'
+    noShopAccess: Sorry, you dont have permission for shop %s...
+    selectedShop: 'Selected shop: %s'
+    noPermsCmdDisabled: Command is disable due to no permissions plugin found using Vault plugin.
+    permission: This command requires permission %s.
+    invalidArguments: Invalid arguments for %s. Use %s.
+    ingameCmdOnly: This command is only available in the game.
+    clickBuy: 'Click&buy: L=%s R=%s SL=%s SR=%s'
+    clickSell: 'Click&sell: L=%s R=%s SL=%s SR=%s'
+    noStock: OUT OF STOCK!
+    buttons: (L=left, R=right, S=shift)
+    name: 'Name: %s'
+    playerSold: '%s sold %s %s for %s each (%s total) to shop %s'
+    playerBought: '%s bought %s %s for %s each (%s total) from shop %s'
+    youSold: You sold %s %s for %s each (%s total)
+    youBought: You bought %s %s for %s each (%s total)
+    purchasePrice: 'purchase price: %s'
+    salesPrice: 'sales price: %s'
+    noDot: A dot is not allowed here!
+    renamed: Renamed %s as %s!
+    upgradingConfigFrom: Upgrading configuration file from version
+    upgradedConfig: Successfully upgraded config file to version
+    configSaved: Configuration file was saved!
+    configReloaded: Configuration file was reloaded!
+    holdStack: You need to hold an item in hand to use this command
+    noSuchItem: This item is not available in active shop
+    materialEnabled: Enabled material %s in shop %s
+    materialDisabled: Disabled material %s in shop %s
+    options: Options
+    optionsPage: "\xa77Page: %s / %s"
+    optionsSorting: "\xa77Sorting: %s"
+    optionsCategory: "\xa77Category: %s"
+    optionsLores:
+    - 'left click: next page'
+    - 'right click: previous page'
+    - 'shift+LMB: change sorting'
+    - 'shift+RMB: change category'
+    sortingSP: sales price (descending)
+    sortingPP: purchase price (ascending)
+  suomi:
+    economyMissing: "Valuuttapluginia ei l\xf6ytynyt Vault pluginin kautta! AutoPrice\
+      \ sammuu..."
+    permissionsMissing: "K\xe4ytt\xf6oikeuspluginia ei l\xf6ytynyt Vault pluginin\
+      \ kautta. Osa pelin kautta k\xe4ytett\xe4vist\xe4 komennoista on poissa pelist\xe4\
+      ."
+    loaded: "Ladattu %s v%s (Tuomo K\xe4m\xe4r\xe4inen / tubelius@gmail.com)"
+    help: 'Ohje: Avaa kauppa: %s      Listaa kaupat: %s      Valitse kauppa: %s'
+    incorrectArgument: 'Virheellinen argumentti: %s! %s'
+    shops: "Sinulla on p\xe4\xe4sy kauppoihin: %s"
+    invalidShop: "Ei kauppaa nimelt\xe4: %s. Voit listat kaupat komennolla %s."
+    noShopAccess: "Ei k\xe4ytt\xf6oikeutta kauppaan %s..."
+    selectedShop: 'Valitsit kaupan: %s'
+    noPermsCmdDisabled: Komento ei ole k\xe4yt\xf6ss\xe4 koska k\xe4ytt\xf6oikeuspluginia ei l\xf6ytynyt Vault pluginin kautta.
+    permission: "T\xe4m\xe4 komento vaatii k\xe4ytt\xf6oikeuden %s."
+    invalidArguments: "V\xe4\xe4r\xe4t parametrit komennolle %s. K\xe4yt\xe4 %s."
+    ingameCmdOnly: "T\xe4m\xe4 komento on k\xe4ytett\xe4viss\xe4 vain pelist\xe4 k\xe4\
+      sin."
+    clickBuy: 'Osta: V=%s O=%s SV=%s SO=%s'
+    clickSell: 'Myy: V=%s O=%s SV=%s SO=%s'
+    noStock: LOPPU!
+    buttons: (V=vasen, O=oikea, S=vaihto)
+    name: 'Nimi: %s'
+    playerSold: "%s myi %skpl %s hintaan %s/kpl (%s yhteens\xe4) kauppaan %s"
+    playerBought: "%s osti %skpl %s hintaan %s/kpl (%s yhteens\xe4) kaupasta %s"
+    youSold: "myit %skpl %s hintaan %s/kpl (%s yhteens\xe4)"
+    youBought: "ostit %skpl %s hintaan %s/kpl (%s yhteens\xe4)"
+    purchasePrice: 'ostohinta: %s'
+    salesPrice: 'myyntihinta: %s'
+    noDot: Piste ei ole kelvollinen merkki!
+    renamed: Uudelleen-nimettiin %s -> %s!
+    upgradingConfigFrom: "P\xe4ivitet\xe4\xe4n m\xe4\xe4ritystiedostoa versiosta"
+    upgradedConfig: "M\xe4\xe4ritystiedosto p\xe4ivitettiin onnistuneesti versioon"
+    configSaved: "M\xe4\xe4ritystiedosto on tallennettu!"
+    configReloaded: "M\xe4\xe4ritystiedosto ladattiin k\xe4ytt\xf6\xf6n!"
+    holdStack: "Sinun on pidett\xe4v\xe4 esinett\xe4 k\xe4dess\xe4 k\xe4ytt\xe4\xe4\
+      ksesi t\xe4t\xe4 komentoa"
+    noSuchItem: "T\xe4m\xe4 esine ei ole saatavilla aktiivisessa kaupassa"
+    materialEnabled: Sallittiin materiaali %s kaupassa %s
+    materialDisabled: Poistettiin materiaali %s kaupasta %s
+    options: Asetukset
+    optionsPage: "\xa77Sivu: %s / %s"
+    optionsSorting: "\xa77Lajittelu: %s"
+    optionsCategory: "\xa77Kategoria: %s"
+    optionsLores:
+    - 'hiiren vasen: seuraava sivu'
+    - 'hiiren oikea: edellinen sivu'
+    - 'shift+vasen: vaihda lajittelu'
+    - 'shift+oikea: vaihda kategoria'
+    sortingSP: myyntihinta (laskeva)
+    sortingPP: ostohinta (nouseva)
+shops:
+  default:
+    categories:
+    - food
+    - combat
+    - brewing
+    - colors
+    - tools
+    - potions
+    - building
+    materials:
+      GOLDEN_CARROT:
+        mainMaterial: GOLDEN_CARROT
+        subMaterial: 0
+        categories:
+        - food
+        - brewing
+        salesPrice:
+          price: 0.01
+      SPECKLED_MELON:
+        mainMaterial: SPECKLED_MELON
+        subMaterial: 0
+        categories:
+        - food
+        - brewing
+        salesPrice:
+          price: 15.820001
+      APPLE:
+        mainMaterial: APPLE
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 23.58
+      RAW_BEEF:
+        mainMaterial: RAW_BEEF
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.01
+      COOKED_BEEF:
+        mainMaterial: COOKED_BEEF
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 1.36
+      RAW_CHICKEN:
+        mainMaterial: RAW_CHICKEN
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.01
+      COOKED_CHICKEN:
+        mainMaterial: COOKED_CHICKEN
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 15.27
+      GRILLED_PORK:
+        mainMaterial: GRILLED_PORK
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 2.0
+      ROTTEN_FLESH:
+        mainMaterial: ROTTEN_FLESH
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.01
+      BREAD:
+        mainMaterial: BREAD
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.21000001
+      CAKE:
+        mainMaterial: CAKE
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 98.78
+      COOKIE:
+        mainMaterial: COOKIE
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.04
+      MELON:
+        mainMaterial: MELON
+        subMaterial: 0
+        categories:
+        - food
+        - brewing
+        salesPrice:
+          price: 0.01
+      CARROT_ITEM:
+        mainMaterial: CARROT_ITEM
+        subMaterial: 0
+        categories:
+        - food
+        - brewing
+        salesPrice:
+          price: 0.01
+      POTATO_ITEM:
+        mainMaterial: POTATO_ITEM
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.01
+      BAKED_POTATO:
+        mainMaterial: BAKED_POTATO
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 1.907991886138916
+      PUMPKIN_PIE:
+        mainMaterial: PUMPKIN_PIE
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.59
+      EGG:
+        mainMaterial: EGG
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 2.7
+      SUGAR:
+        mainMaterial: SUGAR
+        subMaterial: 0
+        categories:
+        - food
+        - brewing
+        salesPrice:
+          price: 0.009999999776482582
+      AIR:
+        tradable: false
+        mainMaterial: AIR
+        subMaterial: 0
+        salesPrice: {}
+      BEDROCK:
+        tradable: false
+        mainMaterial: BEDROCK
+        subMaterial: 0
+        salesPrice: {}
+      WATER:
+        tradable: false
+        mainMaterial: WATER
+        subMaterial: 0
+        salesPrice: {}
+      STATIONARY_WATER:
+        tradable: false
+        mainMaterial: STATIONARY_WATER
+        subMaterial: 0
+        salesPrice: {}
+      LAVA:
+        tradable: false
+        mainMaterial: LAVA
+        subMaterial: 0
+        salesPrice: {}
+      STATIONARY_LAVA:
+        tradable: false
+        mainMaterial: STATIONARY_LAVA
+        subMaterial: 0
+        salesPrice: {}
+      SPONGE:
+        tradable: false
+        mainMaterial: SPONGE
+        subMaterial: 0
+        salesPrice: {}
+      BED_BLOCK:
+        tradable: false
+        mainMaterial: BED_BLOCK
+        subMaterial: 0
+        salesPrice: {}
+      DOUBLE_STEP:
+        tradable: false
+        mainMaterial: DOUBLE_STEP
+        subMaterial: 0
+        salesPrice: {}
+      FIRE:
+        tradable: false
+        mainMaterial: FIRE
+        subMaterial: 0
+        salesPrice: {}
+      CROPS:
+        tradable: false
+        mainMaterial: CROPS
+        subMaterial: 0
+        salesPrice: {}
+      SOIL:
+        tradable: false
+        mainMaterial: SOIL
+        subMaterial: 0
+        salesPrice: {}
+      SIGN_POST:
+        tradable: false
+        mainMaterial: SIGN_POST
+        subMaterial: 0
+        salesPrice: {}
+      WOODEN_DOOR:
+        tradable: false
+        mainMaterial: WOODEN_DOOR
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice: {}
+      WALL_SIGN:
+        tradable: false
+        mainMaterial: WALL_SIGN
+        subMaterial: 0
+        salesPrice: {}
+      IRON_DOOR_BLOCK:
+        tradable: false
+        mainMaterial: IRON_DOOR_BLOCK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice: {}
+      SUGAR_CANE_BLOCK:
+        tradable: false
+        mainMaterial: SUGAR_CANE_BLOCK
+        subMaterial: 0
+        salesPrice: {}
+      PORTAL:
+        tradable: false
+        mainMaterial: PORTAL
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice: {}
+      CAKE_BLOCK:
+        tradable: false
+        mainMaterial: CAKE_BLOCK
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice: {}
+      MONSTER_EGGS:
+        tradable: false
+        mainMaterial: MONSTER_EGGS
+        subMaterial: 0
+        salesPrice: {}
+      MELON_BLOCK:
+        tradable: true
+        mainMaterial: MELON_BLOCK
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 18.74
+      PUMPKIN_STEM:
+        tradable: false
+        mainMaterial: PUMPKIN_STEM
+        subMaterial: 0
+        salesPrice: {}
+      MELON_STEM:
+        tradable: false
+        mainMaterial: MELON_STEM
+        subMaterial: 0
+        salesPrice: {}
+      NETHER_WARTS:
+        tradable: false
+        mainMaterial: NETHER_WARTS
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice: {}
+      BREWING_STAND:
+        tradable: false
+        mainMaterial: BREWING_STAND
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice: {}
+      CAULDRON:
+        tradable: false
+        mainMaterial: CAULDRON
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice: {}
+      ENDER_PORTAL:
+        tradable: false
+        mainMaterial: ENDER_PORTAL
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice: {}
+      ENDER_PORTAL_FRAME:
+        tradable: false
+        mainMaterial: ENDER_PORTAL_FRAME
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice: {}
+      DRAGON_EGG:
+        tradable: false
+        mainMaterial: DRAGON_EGG
+        subMaterial: 0
+        salesPrice: {}
+      WOOD_DOUBLE_STEP:
+        tradable: false
+        mainMaterial: WOOD_DOUBLE_STEP
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice: {}
+      COCOA:
+        tradable: false
+        mainMaterial: COCOA
+        subMaterial: 0
+        salesPrice: {}
+      TRIPWIRE:
+        tradable: false
+        mainMaterial: TRIPWIRE
+        subMaterial: 0
+        salesPrice: {}
+      COMMAND:
+        tradable: false
+        mainMaterial: COMMAND
+        subMaterial: 0
+        salesPrice: {}
+      FLOWER_POT:
+        tradable: false
+        mainMaterial: FLOWER_POT
+        subMaterial: 0
+        salesPrice: {}
+      CARROT:
+        tradable: false
+        mainMaterial: CARROT
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice: {}
+      POTATO:
+        tradable: false
+        mainMaterial: POTATO
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice: {}
+      SKULL:
+        tradable: false
+        mainMaterial: SKULL
+        subMaterial: 0
+        salesPrice: {}
+      MAP:
+        tradable: false
+        mainMaterial: MAP
+        subMaterial: 0
+        salesPrice: {}
+      MONSTER_EGG:
+        tradable: false
+        mainMaterial: MONSTER_EGG
+        subMaterial: 0
+        salesPrice: {}
+      WRITTEN_BOOK:
+        tradable: false
+        mainMaterial: WRITTEN_BOOK
+        subMaterial: 0
+        salesPrice: {}
+      ENCHANTED_BOOK:
+        tradable: false
+        mainMaterial: ENCHANTED_BOOK
+        subMaterial: 0
+        salesPrice:
+          price: 0.02
+      STONE:
+        mainMaterial: STONE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.009999999776482582
+      STICK:
+        mainMaterial: STICK
+        subMaterial: 0
+        salesPrice:
+          price: 0.04
+      SNOW_BLOCK:
+        mainMaterial: SNOW_BLOCK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      SNOW:
+        tradable: false
+        mainMaterial: SNOW
+        subMaterial: 0
+        salesPrice: {}
+      SNOW_BALL:
+        tradable: true
+        mainMaterial: SNOW_BALL
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      ICE:
+        mainMaterial: ICE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 92.65
+      CLAY_BALL:
+        tradable: false
+        mainMaterial: CLAY_BALL
+        subMaterial: 0
+        salesPrice: {}
+      BRICK:
+        mainMaterial: BRICK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      OBSIDIAN:
+        mainMaterial: OBSIDIAN
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 2.48
+      NETHERRACK:
+        mainMaterial: NETHERRACK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      NETHER_BRICK:
+        mainMaterial: NETHER_BRICK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      SOUL_SAND:
+        mainMaterial: SOUL_SAND
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 2.33
+      LAPIS_ORE:
+        mainMaterial: LAPIS_ORE
+        subMaterial: 0
+        salesPrice:
+          price: 0.62
+      LAPIS_BLOCK:
+        tradable: true
+        mainMaterial: LAPIS_BLOCK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      EMERALD_BLOCK:
+        tradable: false
+        mainMaterial: EMERALD_BLOCK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice: {}
+      GOLD_ORE:
+        mainMaterial: GOLD_ORE
+        subMaterial: 0
+        salesPrice:
+          price: 1.72
+      GOLD_BLOCK:
+        tradable: true
+        mainMaterial: GOLD_BLOCK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 17.58
+      GOLD_INGOT:
+        mainMaterial: GOLD_INGOT
+        subMaterial: 0
+        salesPrice:
+          price: 0.21000001
+      GOLD_NUGGET:
+        tradable: true
+        mainMaterial: GOLD_NUGGET
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 0.01
+      IRON_ORE:
+        mainMaterial: IRON_ORE
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      IRON_BLOCK:
+        tradable: true
+        mainMaterial: IRON_BLOCK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 13.92
+      IRON_INGOT:
+        mainMaterial: IRON_INGOT
+        subMaterial: 0
+        salesPrice:
+          price: 2.1299999
+      DIAMOND_ORE:
+        mainMaterial: DIAMOND_ORE
+        subMaterial: 0
+        salesPrice:
+          price: 76.68
+      DIAMOND_BLOCK:
+        tradable: true
+        mainMaterial: DIAMOND_BLOCK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 70.240005
+      DIAMOND:
+        mainMaterial: DIAMOND
+        subMaterial: 0
+        salesPrice:
+          price: 33.92
+      QUARTZ_ORE:
+        mainMaterial: QUARTZ_ORE
+        subMaterial: 0
+        salesPrice:
+          price: 46.429996
+      QUARTZ:
+        mainMaterial: QUARTZ
+        subMaterial: 0
+        salesPrice:
+          price: 0.93
+      HAY_BLOCK:
+        mainMaterial: HAY_BLOCK
+        subMaterial: 0
+        salesPrice:
+          price: 12.87
+      QUARTZ_STAIRS:
+        mainMaterial: QUARTZ_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      WOOD_DOOR:
+        mainMaterial: WOOD_DOOR
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      IRON_DOOR:
+        mainMaterial: IRON_DOOR
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 8.968185
+      TRAP_DOOR:
+        mainMaterial: TRAP_DOOR
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.5
+      LADDER:
+        mainMaterial: LADDER
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      FENCE_GATE:
+        mainMaterial: FENCE_GATE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 6.17
+      FENCE:
+        mainMaterial: FENCE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      IRON_FENCE:
+        mainMaterial: IRON_FENCE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.009999999776482582
+      NETHER_FENCE:
+        mainMaterial: NETHER_FENCE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      SIGN:
+        mainMaterial: SIGN
+        subMaterial: 0
+        salesPrice:
+          price: 11.610001
+      GLASS:
+        mainMaterial: GLASS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 7.7400002
+      THIN_GLASS:
+        mainMaterial: THIN_GLASS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 11.35
+      BED:
+        mainMaterial: BED
+        subMaterial: 0
+        salesPrice:
+          price: 30.5
+      CHEST:
+        mainMaterial: CHEST
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      TRAPPED_CHEST:
+        mainMaterial: TRAPPED_CHEST
+        subMaterial: 0
+        salesPrice:
+          price: 11.52
+      WORKBENCH:
+        mainMaterial: WORKBENCH
+        subMaterial: 0
+        salesPrice:
+          price: 0.009999999776482582
+      FURNACE:
+        mainMaterial: FURNACE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      BURNING_FURNACE:
+        tradable: false
+        mainMaterial: BURNING_FURNACE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice: {}
+      BREWING_STAND_ITEM:
+        mainMaterial: BREWING_STAND_ITEM
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 0.1
+      CAULDRON_ITEM:
+        mainMaterial: CAULDRON_ITEM
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 2.75
+      BOOKSHELF:
+        mainMaterial: BOOKSHELF
+        subMaterial: 0
+        salesPrice:
+          price: 30.7
+      JUKEBOX:
+        mainMaterial: JUKEBOX
+        subMaterial: 0
+        salesPrice:
+          price: 76.490005
+      PAINTING:
+        mainMaterial: PAINTING
+        subMaterial: 0
+        salesPrice:
+          price: 17.1
+      ITEM_FRAME:
+        mainMaterial: ITEM_FRAME
+        subMaterial: 0
+        salesPrice:
+          price: 30.710001
+      BOW:
+        mainMaterial: BOW
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.01
+      ARROW:
+        mainMaterial: ARROW
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.01
+      WOOD_SWORD:
+        mainMaterial: WOOD_SWORD
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.089999996
+      STONE_SWORD:
+        mainMaterial: STONE_SWORD
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.009999999776482582
+      GOLD_SWORD:
+        mainMaterial: GOLD_SWORD
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 18.35
+      IRON_SWORD:
+        mainMaterial: IRON_SWORD
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 11.360001
+      DIAMOND_SWORD:
+        mainMaterial: DIAMOND_SWORD
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 85.340004
+      LEATHER_HELMET:
+        mainMaterial: LEATHER_HELMET
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.01
+      GOLD_HELMET:
+        mainMaterial: GOLD_HELMET
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.01
+      CHAINMAIL_HELMET:
+        mainMaterial: CHAINMAIL_HELMET
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 61.329998
+      IRON_HELMET:
+        mainMaterial: IRON_HELMET
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 32.559998
+      DIAMOND_HELMET:
+        mainMaterial: DIAMOND_HELMET
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 273.41
+      LEATHER_CHESTPLATE:
+        mainMaterial: LEATHER_CHESTPLATE
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.1
+      GOLD_CHESTPLATE:
+        mainMaterial: GOLD_CHESTPLATE
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 15.72
+      CHAINMAIL_CHESTPLATE:
+        mainMaterial: CHAINMAIL_CHESTPLATE
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 26.54
+      IRON_CHESTPLATE:
+        mainMaterial: IRON_CHESTPLATE
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 41.66
+      DIAMOND_CHESTPLATE:
+        mainMaterial: DIAMOND_CHESTPLATE
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 255.01
+      LEATHER_LEGGINGS:
+        mainMaterial: LEATHER_LEGGINGS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.26
+      GOLD_LEGGINGS:
+        mainMaterial: GOLD_LEGGINGS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 0.01
+      CHAINMAIL_LEGGINGS:
+        mainMaterial: CHAINMAIL_LEGGINGS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 9.58
+      IRON_LEGGINGS:
+        mainMaterial: IRON_LEGGINGS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 31.07
+      DIAMOND_LEGGINGS:
+        mainMaterial: DIAMOND_LEGGINGS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 262.82
+      LEATHER_BOOTS:
+        mainMaterial: LEATHER_BOOTS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 12.09
+      GOLD_BOOTS:
+        mainMaterial: GOLD_BOOTS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 9.85
+      CHAINMAIL_BOOTS:
+        mainMaterial: CHAINMAIL_BOOTS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 9.58
+      IRON_BOOTS:
+        mainMaterial: IRON_BOOTS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 21.9
+      DIAMOND_BOOTS:
+        mainMaterial: DIAMOND_BOOTS
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 178.14
+      GOLD_AXE:
+        mainMaterial: GOLD_AXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 46.67713
+      WOOD_AXE:
+        mainMaterial: WOOD_AXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 18.41
+      STONE_AXE:
+        mainMaterial: STONE_AXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 4.1800003
+      IRON_AXE:
+        mainMaterial: IRON_AXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 23.11
+      DIAMOND_AXE:
+        mainMaterial: DIAMOND_AXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 220.59999
+      GOLD_PICKAXE:
+        mainMaterial: GOLD_PICKAXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 56.48
+      WOOD_PICKAXE:
+        mainMaterial: WOOD_PICKAXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 18.51
+      STONE_PICKAXE:
+        mainMaterial: STONE_PICKAXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 1.87
+      IRON_PICKAXE:
+        mainMaterial: IRON_PICKAXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 32.67
+      DIAMOND_PICKAXE:
+        mainMaterial: DIAMOND_PICKAXE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 243.40999
+      GOLD_SPADE:
+        mainMaterial: GOLD_SPADE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 12.89
+      WOOD_SPADE:
+        mainMaterial: WOOD_SPADE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 12.39
+      STONE_SPADE:
+        mainMaterial: STONE_SPADE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 16.82
+      DIAMOND_SPADE:
+        mainMaterial: DIAMOND_SPADE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 43.41
+      GOLD_HOE:
+        mainMaterial: GOLD_HOE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 56.48
+      WOOD_HOE:
+        mainMaterial: WOOD_HOE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 0.13
+      STONE_HOE:
+        mainMaterial: STONE_HOE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 18.31
+      IRON_HOE:
+        mainMaterial: IRON_HOE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 0.01
+      DIAMOND_HOE:
+        mainMaterial: DIAMOND_HOE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 88.4
+      TORCH:
+        mainMaterial: TORCH
+        subMaterial: 0
+        salesPrice:
+          price: 0.051579896
+      FLINT_AND_STEEL:
+        mainMaterial: FLINT_AND_STEEL
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 33.0
+      FLINT:
+        mainMaterial: FLINT
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      SHEARS:
+        mainMaterial: SHEARS
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 14.190001
+      BUCKET:
+        mainMaterial: BUCKET
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 16.31
+      WATER_BUCKET:
+        mainMaterial: WATER_BUCKET
+        subMaterial: 0
+        salesPrice:
+          price: 29.81
+      LAVA_BUCKET:
+        mainMaterial: LAVA_BUCKET
+        subMaterial: 0
+        salesPrice:
+          price: 29.85
+      MILK_BUCKET:
+        mainMaterial: MILK_BUCKET
+        subMaterial: 0
+        salesPrice:
+          price: 29.9
+      ENDER_PEARL:
+        mainMaterial: ENDER_PEARL
+        subMaterial: 0
+        salesPrice:
+          price: 0.08
+      EYE_OF_ENDER:
+        mainMaterial: EYE_OF_ENDER
+        subMaterial: 0
+        salesPrice:
+          price: 49.66
+      CARROT_STICK:
+        mainMaterial: CARROT_STICK
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 0.01
+      NAME_TAG:
+        mainMaterial: NAME_TAG
+        subMaterial: 0
+        salesPrice:
+          price: 38.98
+      FIREBALL:
+        mainMaterial: FIREBALL
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 60.8
+      LEATHER:
+        mainMaterial: LEATHER
+        subMaterial: 0
+        salesPrice:
+          price: 37.89
+      PAPER:
+        mainMaterial: PAPER
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      BOWL:
+        mainMaterial: BOWL
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 6.890239
+      STRING:
+        mainMaterial: STRING
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      FEATHER:
+        mainMaterial: FEATHER
+        subMaterial: 0
+        salesPrice:
+          price: 0.05
+      SLIME_BALL:
+        mainMaterial: SLIME_BALL
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 0.08
+      BONE:
+        mainMaterial: BONE
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      BOOK:
+        mainMaterial: BOOK
+        subMaterial: 0
+        salesPrice:
+          price: 19.86
+      BOOK_AND_QUILL:
+        mainMaterial: BOOK_AND_QUILL
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 5.0800004
+      EMPTY_MAP:
+        mainMaterial: EMPTY_MAP
+        subMaterial: 0
+        salesPrice:
+          price: 49.32
+      MAGMA_CREAM:
+        mainMaterial: MAGMA_CREAM
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 4.9
+      FIREWORK:
+        mainMaterial: FIREWORK
+        subMaterial: 0
+        salesPrice:
+          price: 28.69
+      FIREWORK_CHARGE:
+        mainMaterial: FIREWORK_CHARGE
+        subMaterial: 0
+        salesPrice:
+          price: 211.28
+      SEEDS:
+        mainMaterial: SEEDS
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      PUMPKIN_SEEDS:
+        mainMaterial: PUMPKIN_SEEDS
+        subMaterial: 0
+        salesPrice:
+          price: 1.7
+      MELON_SEEDS:
+        mainMaterial: MELON_SEEDS
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      BOAT:
+        mainMaterial: BOAT
+        subMaterial: 0
+        salesPrice:
+          price: 11.2300005
+      SADDLE:
+        mainMaterial: SADDLE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 1.0
+      POWERED_RAIL:
+        mainMaterial: POWERED_RAIL
+        subMaterial: 0
+        salesPrice:
+          price: 0.94
+      DETECTOR_RAIL:
+        mainMaterial: DETECTOR_RAIL
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      RAILS:
+        mainMaterial: RAILS
+        subMaterial: 0
+        salesPrice:
+          price: 3.21
+      ACTIVATOR_RAIL:
+        mainMaterial: ACTIVATOR_RAIL
+        subMaterial: 0
+        salesPrice:
+          price: 6.2000003
+      MINECART:
+        mainMaterial: MINECART
+        subMaterial: 0
+        salesPrice:
+          price: 0.009999999776482582
+      STORAGE_MINECART:
+        mainMaterial: STORAGE_MINECART
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      POWERED_MINECART:
+        mainMaterial: POWERED_MINECART
+        subMaterial: 0
+        salesPrice:
+          price: 2.67
+      HOPPER_MINECART:
+        mainMaterial: HOPPER_MINECART
+        subMaterial: 0
+        salesPrice:
+          price: 2.89
+      EXPLOSIVE_MINECART:
+        mainMaterial: EXPLOSIVE_MINECART
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 2.73
+      TNT:
+        mainMaterial: TNT
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 14.85
+      REDSTONE_ORE:
+        mainMaterial: REDSTONE_ORE
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      GLOWING_REDSTONE_ORE:
+        tradable: false
+        mainMaterial: GLOWING_REDSTONE_ORE
+        subMaterial: 0
+        salesPrice: {}
+      REDSTONE_BLOCK:
+        tradable: true
+        mainMaterial: REDSTONE_BLOCK
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      REDSTONE_WIRE:
+        tradable: false
+        mainMaterial: REDSTONE_WIRE
+        subMaterial: 0
+        salesPrice: {}
+      REDSTONE_TORCH_OFF:
+        tradable: false
+        mainMaterial: REDSTONE_TORCH_OFF
+        subMaterial: 0
+        salesPrice: {}
+      DIODE_BLOCK_OFF:
+        tradable: false
+        mainMaterial: DIODE_BLOCK_OFF
+        subMaterial: 0
+        salesPrice: {}
+      DIODE_BLOCK_ON:
+        tradable: false
+        mainMaterial: DIODE_BLOCK_ON
+        subMaterial: 0
+        salesPrice: {}
+      REDSTONE_LAMP_ON:
+        tradable: false
+        mainMaterial: REDSTONE_LAMP_ON
+        subMaterial: 0
+        salesPrice: {}
+      REDSTONE_COMPARATOR_OFF:
+        tradable: false
+        mainMaterial: REDSTONE_COMPARATOR_OFF
+        subMaterial: 0
+        salesPrice: {}
+      REDSTONE_COMPARATOR_ON:
+        tradable: false
+        mainMaterial: REDSTONE_COMPARATOR_ON
+        subMaterial: 0
+        salesPrice: {}
+      REDSTONE_COMPARATOR:
+        mainMaterial: REDSTONE_COMPARATOR
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      LEVER:
+        mainMaterial: LEVER
+        subMaterial: 0
+        salesPrice:
+          price: 2.7
+      STONE_BUTTON:
+        mainMaterial: STONE_BUTTON
+        subMaterial: 0
+        salesPrice:
+          price: 2.0444455
+      TRIPWIRE_HOOK:
+        mainMaterial: TRIPWIRE_HOOK
+        subMaterial: 0
+        salesPrice:
+          price: 11.54
+      WOOD_BUTTON:
+        mainMaterial: WOOD_BUTTON
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      DAYLIGHT_DETECTOR:
+        mainMaterial: DAYLIGHT_DETECTOR
+        subMaterial: 0
+        salesPrice:
+          price: 11.55
+      HOPPER:
+        mainMaterial: HOPPER
+        subMaterial: 0
+        salesPrice:
+          price: 37.41
+      DROPPER:
+        mainMaterial: DROPPER
+        subMaterial: 0
+        salesPrice:
+          price: 0.05
+      WOOD_PLATE:
+        mainMaterial: WOOD_PLATE
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      STONE_PLATE:
+        mainMaterial: STONE_PLATE
+        subMaterial: 0
+        salesPrice:
+          price: 12.16
+      DISPENSER:
+        mainMaterial: DISPENSER
+        subMaterial: 0
+        salesPrice:
+          price: 4.2200003
+      NOTE_BLOCK:
+        mainMaterial: NOTE_BLOCK
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      PISTON_BASE:
+        mainMaterial: PISTON_BASE
+        subMaterial: 0
+        salesPrice:
+          price: 4.4700003
+      PISTON_STICKY_BASE:
+        mainMaterial: PISTON_STICKY_BASE
+        subMaterial: 0
+        salesPrice:
+          price: 22.1
+      PISTON_EXTENSION:
+        tradable: false
+        mainMaterial: PISTON_EXTENSION
+        subMaterial: 0
+        salesPrice: {}
+      PISTON_MOVING_PIECE:
+        tradable: false
+        mainMaterial: PISTON_MOVING_PIECE
+        subMaterial: 0
+        salesPrice: {}
+      PUMPKIN:
+        mainMaterial: PUMPKIN
+        subMaterial: 0
+        salesPrice:
+          price: 0.009999999776482582
+      CACTUS:
+        mainMaterial: CACTUS
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      DEAD_BUSH:
+        mainMaterial: DEAD_BUSH
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      VINE:
+        mainMaterial: VINE
+        subMaterial: 0
+        salesPrice:
+          price: 34.739998
+      WATER_LILY:
+        mainMaterial: WATER_LILY
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      WHEAT:
+        mainMaterial: WHEAT
+        subMaterial: 0
+        salesPrice:
+          price: 0.45
+      SUGAR_CANE:
+        mainMaterial: SUGAR_CANE
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      GoldenApple:
+        mainMaterial: GOLDEN_APPLE
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 23.61
+      EnchantedGoldenApple:
+        mainMaterial: GOLDEN_APPLE
+        subMaterial: 1
+        categories:
+        - food
+        salesPrice:
+          price: 265.78
+      RawPork:
+        mainMaterial: PORK
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 6.4100003
+      RawFish:
+        mainMaterial: RAW_FISH
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.88
+      RawSalmon:
+        mainMaterial: RAW_FISH
+        subMaterial: 1
+        categories:
+        - food
+        salesPrice:
+          price: 0.01
+      Clownfish:
+        mainMaterial: RAW_FISH
+        subMaterial: 2
+        categories:
+        - food
+        salesPrice:
+          price: 123.83
+      Pufferfish:
+        mainMaterial: RAW_FISH
+        subMaterial: 3
+        categories:
+        - food
+        - brewing
+        salesPrice:
+          price: 153.01999
+      CookedFish:
+        mainMaterial: COOKED_FISH
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 8.150001
+      CookedSalmon:
+        mainMaterial: COOKED_FISH
+        subMaterial: 1
+        categories:
+        - food
+        salesPrice:
+          price: 12.21
+      MushroomSoup:
+        mainMaterial: MUSHROOM_SOUP
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.19905109703540802
+      PoisonousPotato:
+        mainMaterial: POISONOUS_POTATO
+        subMaterial: 0
+        categories:
+        - food
+        salesPrice:
+          price: 0.01
+      MAP2:
+        mainMaterial: MAP
+        subMaterial: 66
+        salesPrice:
+          price: 71.66
+      Cobblestone:
+        mainMaterial: COBBLESTONE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      MossyCobblestone:
+        mainMaterial: MOSSY_COBBLESTONE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      Gravel:
+        mainMaterial: GRAVEL
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      Dirt:
+        mainMaterial: DIRT
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      Podzol:
+        mainMaterial: DIRT
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      GrassBlock:
+        mainMaterial: GRASS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      Sand:
+        mainMaterial: SAND
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.17
+      RedSand:
+        mainMaterial: SAND
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 12.3
+      SandStone:
+        mainMaterial: SANDSTONE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      ChiseledSandStone:
+        mainMaterial: SANDSTONE
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      SmoothSandStone:
+        mainMaterial: SANDSTONE
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      OakWood:
+        mainMaterial: LOG
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.21000001
+      SpruceWood:
+        mainMaterial: LOG
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 7.51
+      BirchWood:
+        mainMaterial: LOG
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 0.19000001
+      JungleWood:
+        mainMaterial: LOG
+        subMaterial: 3
+        categories:
+        - building
+        salesPrice:
+          price: 0.12
+      AcaciaWood:
+        mainMaterial: LOG_2
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 29.550001
+      DarkOakWood:
+        mainMaterial: LOG_2
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 0.63
+      OakWoodPlanks:
+        mainMaterial: WOOD
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.13
+      SpruceWoodPlanks:
+        mainMaterial: WOOD
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      BirchWoodPlanks:
+        mainMaterial: WOOD
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 0.089999996
+      JungleWoodPlanks:
+        mainMaterial: WOOD
+        subMaterial: 3
+        categories:
+        - building
+        salesPrice:
+          price: 0.22
+      AcaciaWoodPlanks:
+        mainMaterial: WOOD
+        subMaterial: 4
+        categories:
+        - building
+        salesPrice:
+          price: 0.1
+      DarkOakWoodPlanks:
+        mainMaterial: WOOD
+        subMaterial: 5
+        categories:
+        - building
+        salesPrice:
+          price: 0.12
+      PackedIce:
+        mainMaterial: PACKED_ICE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      ClayBrick:
+        mainMaterial: CLAY_BRICK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      Clay:
+        mainMaterial: CLAY
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      HardClay:
+        mainMaterial: HARD_CLAY
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      WhiteStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 0
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      OrangeStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 1
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      MagentaStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 2
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LightblueStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 3
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      YellowStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 4
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LimeStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 5
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      PinkStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 6
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      GreyStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 7
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LightgreyStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 8
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.009999999776482582
+      CyanStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 9
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      PurpleStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 10
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BlueStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 11
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BrownStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 12
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      GreenStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 13
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      RedStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 14
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BlackStainedClay:
+        mainMaterial: STAINED_CLAY
+        subMaterial: 15
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      StoneBricks:
+        mainMaterial: SMOOTH_BRICK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      MossyStoneBricks:
+        mainMaterial: SMOOTH_BRICK
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      CrackedStoneBricks:
+        mainMaterial: SMOOTH_BRICK
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      ChiselledStoneBricks:
+        mainMaterial: SMOOTH_BRICK
+        subMaterial: 3
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      Mycelium:
+        mainMaterial: MYCEL
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      COAL_ORE:
+        mainMaterial: COAL_ORE
+        subMaterial: 0
+        salesPrice:
+          price: 0.089999996
+      CoalBlock:
+        mainMaterial: COAL_BLOCK
+        subMaterial: 0
+        tradable: true
+        categories:
+        - building
+        salesPrice:
+          price: 0.05
+      Coal:
+        mainMaterial: COAL
+        subMaterial: 0
+        salesPrice:
+          price: 0.044706035
+      Charcoal:
+        mainMaterial: COAL
+        subMaterial: 1
+        salesPrice:
+          price: 0.01
+      EmeraldOre:
+        mainMaterial: EMERALD_ORE
+        subMaterial: 0
+        salesPrice:
+          price: 59.35
+      Emerald:
+        mainMaterial: EMERALD
+        subMaterial: 0
+        salesPrice:
+          price: 6.01
+      BlockOfQuartz:
+        mainMaterial: QUARTZ_BLOCK
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      ChiselledQuartzBlock:
+        mainMaterial: QUARTZ_BLOCK
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 0.10999999
+      PillarQuartzBlock:
+        mainMaterial: QUARTZ_BLOCK
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 0.16388854
+      EndStone:
+        mainMaterial: ENDER_STONE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      Web:
+        mainMaterial: WEB
+        subMaterial: 0
+        salesPrice:
+          price: 34.309998
+      StoneSlab:
+        mainMaterial: STEP
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.009999999776482582
+      SandStoneSlab:
+        mainMaterial: STEP
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      CobbleStoneSlab:
+        mainMaterial: STEP
+        subMaterial: 3
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      Brickslab:
+        mainMaterial: STEP
+        subMaterial: 4
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      StoneBrickslab:
+        mainMaterial: STEP
+        subMaterial: 5
+        categories:
+        - building
+        salesPrice:
+          price: 0.26
+      NetherBrickslab:
+        mainMaterial: STEP
+        subMaterial: 6
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      QuartzSlab:
+        mainMaterial: STEP
+        subMaterial: 7
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      OakWoodSlab:
+        mainMaterial: WOOD_STEP
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      SpruceWoodSlab:
+        mainMaterial: WOOD_STEP
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      BirchWoodSlab:
+        mainMaterial: WOOD_STEP
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 0.009999999776482582
+      JungleWoodSlab:
+        mainMaterial: WOOD_STEP
+        subMaterial: 3
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      AcaciaWoodSlab:
+        mainMaterial: WOOD_STEP
+        subMaterial: 4
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      DarkOakWoodSlab:
+        mainMaterial: WOOD_STEP
+        subMaterial: 5
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      OakWoodStairs:
+        mainMaterial: WOOD_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.009999999776482582
+      StoneStairs:
+        mainMaterial: COBBLESTONE_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      BrickStairs:
+        mainMaterial: BRICK_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      StoneBrickStairs:
+        mainMaterial: SMOOTH_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 2.57
+      NetherBrickStairs:
+        mainMaterial: NETHER_BRICK_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      SandStoneStairs:
+        mainMaterial: SANDSTONE_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      SpruceWoodStairs:
+        mainMaterial: SPRUCE_WOOD_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      BirchWoodStairs:
+        mainMaterial: BIRCH_WOOD_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      JungleWoodStairs:
+        mainMaterial: JUNGLE_WOOD_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      AcaciaStairs:
+        mainMaterial: ACACIA_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      DarkOakStairs:
+        mainMaterial: DARK_OAK_STAIRS
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      NetherBrickItem:
+        mainMaterial: NETHER_BRICK_ITEM
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.009999999776482582
+      CobbleStoneWall:
+        mainMaterial: COBBLE_WALL
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      MossyCobblestoneWall:
+        mainMaterial: COBBLE_WALL
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      WhiteStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 0
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      OrangeStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 1
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      MagentaStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 2
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LightBlueStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 3
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      YellowStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 4
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LimeStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 5
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      PinkStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 6
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      GrayStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 7
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LightGrayStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 8
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      CyanStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 9
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      PurpleStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 10
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BlueStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 11
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BrownStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 12
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 4.32
+      GreenStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 13
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      RedStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 14
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BlackStainedGlass:
+        mainMaterial: STAINED_GLASS
+        subMaterial: 15
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      WhiteStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 0
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      OrangeStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 1
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      MagentaStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 2
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LightBlueStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 3
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      YellowStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 4
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LimeStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 5
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      PinkStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 6
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      GrayStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 7
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      LightGrayStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 8
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      CyanStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 9
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      PurpleStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 10
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BlueStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 11
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BrownStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 12
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      GreenStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 13
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      RedStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 14
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      BlackStainedGlassPane:
+        mainMaterial: STAINED_GLASS_PANE
+        subMaterial: 15
+        categories:
+        - building
+        - colors
+        salesPrice:
+          price: 0.01
+      EnderChest:
+        mainMaterial: ENDER_CHEST
+        subMaterial: 0
+        salesPrice:
+          price: 161.78
+      EnchantmentTable:
+        mainMaterial: ENCHANTMENT_TABLE
+        subMaterial: 0
+        salesPrice:
+          price: 133.95999
+      Anvil:
+        mainMaterial: ANVIL
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 70.170006
+      SlightlyDamagedAnvil:
+        mainMaterial: ANVIL
+        subMaterial: 1
+        categories:
+        - tools
+        salesPrice:
+          price: 95.670006
+      VeryDamagedAnvil:
+        mainMaterial: ANVIL
+        subMaterial: 2
+        categories:
+        - tools
+        salesPrice:
+          price: 89.810005
+      FlowerPot:
+        mainMaterial: FLOWER_POT_ITEM
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      IronSpade:
+        mainMaterial: IRON_SPADE
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 0.7
+      FishingRod:
+        mainMaterial: FISHING_ROD
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 15.570001
+      Compass:
+        mainMaterial: COMPASS
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 50.03
+      Clock:
+        mainMaterial: WATCH
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 56.559998
+      Inksack:
+        mainMaterial: INK_SACK
+        subMaterial: 0
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      RoseRed:
+        mainMaterial: INK_SACK
+        subMaterial: 1
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      CactusGreen:
+        mainMaterial: INK_SACK
+        subMaterial: 2
+        categories:
+        - colors
+        salesPrice:
+          price: 0.009999999776482582
+      CocoaBeans:
+        mainMaterial: INK_SACK
+        subMaterial: 3
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      LapisLazuli:
+        mainMaterial: INK_SACK
+        subMaterial: 4
+        categories:
+        - colors
+        salesPrice:
+          price: 0.009999999776482582
+      PurpleDye:
+        mainMaterial: INK_SACK
+        subMaterial: 5
+        categories:
+        - colors
+        salesPrice:
+          price: 0.014137061
+      CyanDye:
+        mainMaterial: INK_SACK
+        subMaterial: 6
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      LightgreyDye:
+        mainMaterial: INK_SACK
+        subMaterial: 7
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      GreyDye:
+        mainMaterial: INK_SACK
+        subMaterial: 8
+        categories:
+        - colors
+        salesPrice:
+          price: 11.45
+      PinkDye:
+        mainMaterial: INK_SACK
+        subMaterial: 9
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      LimeGreenDye:
+        mainMaterial: INK_SACK
+        subMaterial: 10
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      DandelionYellow:
+        mainMaterial: INK_SACK
+        subMaterial: 11
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      LightblueDye:
+        mainMaterial: INK_SACK
+        subMaterial: 12
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      MagentaDye:
+        mainMaterial: INK_SACK
+        subMaterial: 13
+        categories:
+        - colors
+        salesPrice:
+          price: 11.49
+      OrangeDye:
+        mainMaterial: INK_SACK
+        subMaterial: 14
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      BoneMeal:
+        mainMaterial: INK_SACK
+        subMaterial: 15
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      Wool:
+        mainMaterial: WOOL
+        subMaterial: 0
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.014067364
+      OrangeWool:
+        mainMaterial: WOOL
+        subMaterial: 1
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      MagentaWool:
+        mainMaterial: WOOL
+        subMaterial: 2
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      LightblueWool:
+        mainMaterial: WOOL
+        subMaterial: 3
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      YellowWool:
+        mainMaterial: WOOL
+        subMaterial: 4
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      LightGreenWool:
+        mainMaterial: WOOL
+        subMaterial: 5
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      PinkWool:
+        mainMaterial: WOOL
+        subMaterial: 6
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      GreyWool:
+        mainMaterial: WOOL
+        subMaterial: 7
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      LightgreyWool:
+        mainMaterial: WOOL
+        subMaterial: 8
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      CyanWool:
+        mainMaterial: WOOL
+        subMaterial: 9
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      PurpleWool:
+        mainMaterial: WOOL
+        subMaterial: 10
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      BlueWool:
+        mainMaterial: WOOL
+        subMaterial: 11
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      BrownWool:
+        mainMaterial: WOOL
+        subMaterial: 12
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      GreenWool:
+        mainMaterial: WOOL
+        subMaterial: 13
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      RedWool:
+        mainMaterial: WOOL
+        subMaterial: 14
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.010373421
+      BlackWool:
+        mainMaterial: WOOL
+        subMaterial: 15
+        categories:
+        - colors
+        - building
+        salesPrice:
+          price: 0.01
+      Carpet:
+        mainMaterial: CARPET
+        subMaterial: 0
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      OrangeCarpet:
+        mainMaterial: CARPET
+        subMaterial: 1
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      MagentaCarpet:
+        mainMaterial: CARPET
+        subMaterial: 2
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      LightblueCarpet:
+        mainMaterial: CARPET
+        subMaterial: 3
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      YellowCarpet:
+        mainMaterial: CARPET
+        subMaterial: 4
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      LimeCarpet:
+        mainMaterial: CARPET
+        subMaterial: 5
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      PinkCarpet:
+        mainMaterial: CARPET
+        subMaterial: 6
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      GreyCarpet:
+        mainMaterial: CARPET
+        subMaterial: 7
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      LightgreyCarpet:
+        mainMaterial: CARPET
+        subMaterial: 8
+        categories:
+        - colors
+        salesPrice:
+          price: 0.015819147
+      CyanCarpet:
+        mainMaterial: CARPET
+        subMaterial: 9
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      PurpleCarpet:
+        mainMaterial: CARPET
+        subMaterial: 10
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      BlueCarpet:
+        mainMaterial: CARPET
+        subMaterial: 11
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      BrownCarpet:
+        mainMaterial: CARPET
+        subMaterial: 12
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      GreenCarpet:
+        mainMaterial: CARPET
+        subMaterial: 13
+        categories:
+        - colors
+        salesPrice:
+          price: 0.009999999776482582
+      RedCarpet:
+        mainMaterial: CARPET
+        subMaterial: 14
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      BlackCarpet:
+        mainMaterial: CARPET
+        subMaterial: 15
+        categories:
+        - colors
+        salesPrice:
+          price: 0.01
+      Leash:
+        mainMaterial: LEASH
+        subMaterial: 0
+        categories:
+        - tools
+        salesPrice:
+          price: 52.199997
+      Sulphur:
+        mainMaterial: SULPHUR
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 0.94
+      BlazeRod:
+        mainMaterial: BLAZE_ROD
+        subMaterial: 0
+        salesPrice:
+          price: 47.26
+      BlazePowder:
+        mainMaterial: BLAZE_POWDER
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 77.37
+      SpiderEye:
+        mainMaterial: SPIDER_EYE
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 0.01
+      FermentedSpiderEye:
+        mainMaterial: FERMENTED_SPIDER_EYE
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 5.4500003
+      SkeletonSkull:
+        tradable: false
+        mainMaterial: SKULL_ITEM
+        subMaterial: 0
+        salesPrice:
+          price: 0.23000005
+      WitherSkeletonSkull:
+        mainMaterial: SKULL_ITEM
+        subMaterial: 1
+        salesPrice:
+          price: 188.86
+      ZombieHead:
+        tradable: false
+        mainMaterial: SKULL_ITEM
+        subMaterial: 2
+        salesPrice:
+          price: 0.23000005
+      Head:
+        tradable: false
+        mainMaterial: SKULL_ITEM
+        subMaterial: 3
+        salesPrice:
+          price: 0.23000005
+      CreeperHead:
+        tradable: false
+        mainMaterial: SKULL_ITEM
+        subMaterial: 4
+        salesPrice:
+          price: 0.23000005
+      GlassBottle:
+        mainMaterial: GLASS_BOTTLE
+        subMaterial: 0
+        categories:
+        - brewing
+        - tools
+        - potions
+        salesPrice:
+          price: 0.12
+      BottleOEnchanting:
+        mainMaterial: EXP_BOTTLE
+        subMaterial: 0
+        categories:
+        - potions
+        salesPrice:
+          price: 16.23
+      WaterBottle:
+        mainMaterial: POTION
+        subMaterial: 0
+        categories:
+        - brewing
+        - potions
+        salesPrice:
+          price: 13.650001
+      AwkWardPotion:
+        mainMaterial: POTION
+        subMaterial: 16
+        categories:
+        - brewing
+        - potions
+        salesPrice:
+          price: 62.399998
+      ThickPotion:
+        mainMaterial: POTION
+        subMaterial: 32
+        categories:
+        - brewing
+        - potions
+        salesPrice:
+          price: 99.670006
+      MundanePotion:
+        displayCustomMaterialNameInShop: true
+        mainMaterial: POTION
+        subMaterial: 8192
+        categories:
+        - brewing
+        - potions
+        salesPrice:
+          price: 0.01
+      MundanePotionExtended:
+        displayCustomMaterialNameInShop: true
+        mainMaterial: POTION
+        subMaterial: 64
+        categories:
+        - brewing
+        - potions
+        salesPrice:
+          price: 43.098774
+      FireResistance:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16307
+        categories:
+        - potions
+        salesPrice:
+          price: 214.34148
+      InvisibilitySplash6min:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 24654
+        categories:
+        - potions
+        salesPrice:
+          price: 0.10999999
+      MundanePotionSplash:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16384
+        categories:
+        - potions
+        salesPrice:
+          price: 0.0675
+      WeaknessSplash3min:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 24648
+        categories:
+        - potions
+        salesPrice:
+          price: 15.22
+      PotionOfHealing:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16341
+        categories:
+        - potions
+        salesPrice:
+          price: 83.86951
+      RegenerationPotion:
+        mainMaterial: POTION
+        subMaterial: 8193
+        categories:
+        - potions
+        salesPrice:
+          price: 62.149998
+      Regeneration2:
+        mainMaterial: POTION
+        subMaterial: 8225
+        categories:
+        - potions
+        salesPrice:
+          price: 32.59
+      RegenExtPotion:
+        mainMaterial: POTION
+        subMaterial: 8257
+        categories:
+        - potions
+        salesPrice:
+          price: 52.359997
+      RegenerationSplash:
+        mainMaterial: POTION
+        subMaterial: 16385
+        categories:
+        - potions
+        salesPrice:
+          price: 62.14
+      Regeneration2Splash:
+        mainMaterial: POTION
+        subMaterial: 16417
+        categories:
+        - potions
+        salesPrice:
+          price: 62.14
+      RegenExtSplash:
+        mainMaterial: POTION
+        subMaterial: 16449
+        categories:
+        - potions
+        salesPrice:
+          price: 60.399998
+      PotionOfSwiftness:
+        mainMaterial: POTION
+        subMaterial: 8194
+        categories:
+        - potions
+        salesPrice:
+          price: 21.7
+      PotionOfSwiftness2:
+        mainMaterial: POTION
+        subMaterial: 8226
+        categories:
+        - potions
+        salesPrice:
+          price: 0.009999999776482582
+      SwiftnessExtPotion:
+        mainMaterial: POTION
+        subMaterial: 8258
+        categories:
+        - potions
+        salesPrice:
+          price: 39.42
+      SplashOfSwiftness:
+        mainMaterial: POTION
+        subMaterial: 16386
+        categories:
+        - potions
+        salesPrice:
+          price: 112.33
+      SplashOfSwiftness2:
+        mainMaterial: POTION
+        subMaterial: 16418
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      SwiftnessExtSplash:
+        mainMaterial: POTION
+        subMaterial: 16450
+        categories:
+        - potions
+        salesPrice:
+          price: 12.95
+      FireResistance3min:
+        mainMaterial: POTION
+        subMaterial: 8195
+        categories:
+        - potions
+        salesPrice:
+          price: 109.62
+      FireResPotion3mRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 8227
+        categories:
+        - potions
+        salesPrice:
+          price: 92.47
+      FireResistanceExt:
+        mainMaterial: POTION
+        subMaterial: 8259
+        categories:
+        - potions
+        salesPrice:
+          price: 19.130001
+      FireResistanceSplash:
+        mainMaterial: POTION
+        subMaterial: 16387
+        categories:
+        - potions
+        salesPrice:
+          price: 62.26
+      FireResSpl2mRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16419
+        categories:
+        - potions
+        salesPrice:
+          price: 305.24002
+      FireresSplashExt:
+        mainMaterial: POTION
+        subMaterial: 16451
+        categories:
+        - potions
+        salesPrice:
+          price: 20.58
+      PotionOfPoison:
+        mainMaterial: POTION
+        subMaterial: 8196
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      PotionOfPoison2:
+        mainMaterial: POTION
+        subMaterial: 8228
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      PotionOfPoisonExt:
+        mainMaterial: POTION
+        subMaterial: 8260
+        categories:
+        - potions
+        salesPrice:
+          price: 56.429996
+      SplashOfPoison:
+        mainMaterial: POTION
+        subMaterial: 16388
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      SplashOfPoison2:
+        mainMaterial: POTION
+        subMaterial: 16420
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      SplashOfPoisonExt:
+        mainMaterial: POTION
+        subMaterial: 16452
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      PotionOfHealing2:
+        mainMaterial: POTION
+        subMaterial: 8197
+        categories:
+        - potions
+        salesPrice:
+          price: 124.51
+      PotionOfHealing22:
+        mainMaterial: POTION
+        subMaterial: 8229
+        categories:
+        - potions
+        salesPrice:
+          price: 45.71
+      PotionOfHealingRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 8261
+        categories:
+        - potions
+        salesPrice:
+          price: 118.1
+      SplashOfHealing:
+        mainMaterial: POTION
+        subMaterial: 16389
+        categories:
+        - potions
+        salesPrice:
+          price: 41.309998
+      SplashOfHealing2:
+        mainMaterial: POTION
+        subMaterial: 16421
+        categories:
+        - potions
+        salesPrice:
+          price: 109.69
+      SplashOfHealingRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16453
+        categories:
+        - potions
+        salesPrice:
+          price: 118.07
+      NightVision3min:
+        mainMaterial: POTION
+        subMaterial: 8198
+        categories:
+        - potions
+        salesPrice:
+          price: 62.39
+      NightVision3mRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 8230
+        categories:
+        - potions
+        salesPrice:
+          price: 118.240005
+      PotionOfNightVision2:
+        mainMaterial: POTION
+        subMaterial: 8262
+        categories:
+        - potions
+        salesPrice:
+          price: 39.84
+      NightVisionSpl2m15s:
+        mainMaterial: POTION
+        subMaterial: 16390
+        categories:
+        - potions
+        salesPrice:
+          price: 30.720608
+      NightvisSpl2m15sRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16422
+        categories:
+        - potions
+        salesPrice:
+          price: 118.23
+      SplashOfNightVision2:
+        mainMaterial: POTION
+        subMaterial: 16454
+        categories:
+        - potions
+        salesPrice:
+          price: 38.989464
+      PotionOfWeakness:
+        mainMaterial: POTION
+        subMaterial: 8200
+        categories:
+        - potions
+        salesPrice:
+          price: 34.78
+      PotionOfWeaknessExt:
+        mainMaterial: POTION
+        subMaterial: 8264
+        categories:
+        - potions
+        salesPrice:
+          price: 60.35
+      SplashOfWeakness:
+        mainMaterial: POTION
+        subMaterial: 16392
+        categories:
+        - potions
+        salesPrice:
+          price: 19.06
+      PotionOfStrength:
+        mainMaterial: POTION
+        subMaterial: 8201
+        categories:
+        - potions
+        salesPrice:
+          price: 99.68
+      PotionOfStrength2:
+        mainMaterial: POTION
+        subMaterial: 8233
+        categories:
+        - potions
+        salesPrice:
+          price: 86.48
+      StrengthExtended:
+        mainMaterial: POTION
+        subMaterial: 8265
+        categories:
+        - potions
+        salesPrice:
+          price: 142.34
+      SplashOfStrength:
+        mainMaterial: POTION
+        subMaterial: 16393
+        categories:
+        - potions
+        salesPrice:
+          price: 62.25
+      SplashOfStrength2:
+        mainMaterial: POTION
+        subMaterial: 16425
+        categories:
+        - potions
+        salesPrice:
+          price: 62.239998
+      Strength130%6mSpl:
+        mainMaterial: POTION
+        subMaterial: 16457
+        categories:
+        - potions
+        salesPrice:
+          price: 51.609997
+      SlowPotion15%1m30s:
+        mainMaterial: POTION
+        subMaterial: 8202
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      Slow15%1m30sRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 8234
+        categories:
+        - potions
+        salesPrice:
+          price: 121.920006
+      PotionOfSlownessExt:
+        mainMaterial: POTION
+        subMaterial: 8266
+        categories:
+        - potions
+        salesPrice:
+          price: 60.355877
+      Slow15%1m7sSplash:
+        mainMaterial: POTION
+        subMaterial: 16394
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      SlowSpl15%1m7sRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16426
+        categories:
+        - potions
+        salesPrice:
+          price: 121.9
+      SlowExtendedSplash:
+        mainMaterial: POTION
+        subMaterial: 16458
+        categories:
+        - potions
+        salesPrice:
+          price: 51.61734390258789
+      PotionOfHarming:
+        mainMaterial: POTION
+        subMaterial: 8204
+        categories:
+        - potions
+        salesPrice:
+          price: 0.009999999776482582
+      PotionOfHarming2:
+        mainMaterial: POTION
+        subMaterial: 8236
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      HarmingPotionRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 8268
+        categories:
+        - potions
+        salesPrice:
+          price: 112.07
+      SplashOfHarming:
+        mainMaterial: POTION
+        subMaterial: 16396
+        categories:
+        - potions
+        salesPrice:
+          price: 154.23
+      SplashOfHarming2:
+        mainMaterial: POTION
+        subMaterial: 16428
+        categories:
+        - potions
+        salesPrice:
+          price: 7.53
+      HarmingSplashRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16460
+        categories:
+        - potions
+        salesPrice:
+          price: 112.060005
+      Invisibility3min:
+        mainMaterial: POTION
+        subMaterial: 8206
+        categories:
+        - potions
+        salesPrice:
+          price: 0.009999999776482582
+      Invisibility3minRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 8238
+        categories:
+        - potions
+        salesPrice:
+          price: 121.990005
+      InvisibilityExt:
+        mainMaterial: POTION
+        subMaterial: 8270
+        categories:
+        - potions
+        salesPrice:
+          price: 5.410029
+      InvisibilitySplash2min:
+        mainMaterial: POTION
+        subMaterial: 16398
+        categories:
+        - potions
+        salesPrice:
+          price: 0.013333334
+      InvisibleSpl2m15sRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16430
+        categories:
+        - potions
+        salesPrice:
+          price: 0.01
+      InvisibilityExtSplash:
+        mainMaterial: POTION
+        subMaterial: 16462
+        categories:
+        - potions
+        salesPrice:
+          price: 75.51772
+      WaterBreathing:
+        mainMaterial: POTION
+        subMaterial: 8205
+        categories:
+        - potions
+        salesPrice:
+          price: 62.34
+      WaterBreathing2Rev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 8237
+        categories:
+        - potions
+        salesPrice: {}
+      WaterBreathingExtended:
+        mainMaterial: POTION
+        subMaterial: 8269
+        categories:
+        - potions
+        salesPrice:
+          price: 62.329998
+      WaterBreathingSplash:
+        mainMaterial: POTION
+        subMaterial: 16397
+        categories:
+        - potions
+        salesPrice:
+          price: 266.90002
+      WaterBreathingLvl2SplashRev:
+        tradable: false
+        mainMaterial: POTION
+        subMaterial: 16429
+        categories:
+        - potions
+        salesPrice: {}
+      WaterBreathingExtendedSplash:
+        mainMaterial: POTION
+        subMaterial: 16461
+        categories:
+        - potions
+        salesPrice:
+          price: 266.90002
+      GhastTear:
+        mainMaterial: GHAST_TEAR
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 180.93
+      NetherWart:
+        mainMaterial: NETHER_STALK
+        subMaterial: 0
+        salesPrice:
+          price: 18.99
+      Glowstone:
+        mainMaterial: GLOWSTONE
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 11.16
+      GlowstoneDust:
+        mainMaterial: GLOWSTONE_DUST
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 0.022868047
+      JackoLantern:
+        mainMaterial: JACK_O_LANTERN
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 15.402745246887207
+      GoldHorseArmor:
+        mainMaterial: GOLD_BARDING
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 28.57
+      IronHorseArmor:
+        mainMaterial: IRON_BARDING
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 30.25
+      DiamondHorseArmor:
+        mainMaterial: DIAMOND_BARDING
+        subMaterial: 0
+        categories:
+        - combat
+        salesPrice:
+          price: 122.990005
+      RedstoneDust:
+        mainMaterial: REDSTONE
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 0.01
+      RedstoneTorch:
+        mainMaterial: REDSTONE_TORCH_ON
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      Redstonelamp:
+        mainMaterial: REDSTONE_LAMP_OFF
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      RedstoneRepeater:
+        mainMaterial: DIODE
+        subMaterial: 0
+        salesPrice:
+          price: 1.01
+      WeightedPressurePlateLight:
+        mainMaterial: GOLD_PLATE
+        subMaterial: 0
+        salesPrice:
+          price: 47.398052
+      WeightPressurePlateHvy:
+        mainMaterial: IRON_PLATE
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      OakLeaves:
+        mainMaterial: LEAVES
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      SpruceLeaves:
+        mainMaterial: LEAVES
+        subMaterial: 1
+        salesPrice:
+          price: 0.01
+      BirchLeaves:
+        mainMaterial: LEAVES
+        subMaterial: 2
+        salesPrice:
+          price: 0.01
+      JungleLeaves:
+        mainMaterial: LEAVES
+        subMaterial: 3
+        salesPrice:
+          price: 0.01
+      AcaciaLeaves:
+        mainMaterial: LEAVES_2
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      DarkOakLeaves:
+        mainMaterial: LEAVES_2
+        subMaterial: 1
+        salesPrice:
+          price: 0.01
+      OakSapling:
+        mainMaterial: SAPLING
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      SpruceSapling:
+        mainMaterial: SAPLING
+        subMaterial: 1
+        salesPrice:
+          price: 62.109997
+      BirchSapling:
+        mainMaterial: SAPLING
+        subMaterial: 2
+        salesPrice:
+          price: 0.01
+      JungleSapling:
+        mainMaterial: SAPLING
+        subMaterial: 3
+        salesPrice:
+          price: 5.0800004
+      AcaciaSapling:
+        mainMaterial: SAPLING
+        subMaterial: 4
+        salesPrice:
+          price: 0.01
+      DarkOakSapling:
+        mainMaterial: SAPLING
+        subMaterial: 5
+        salesPrice:
+          price: 131.23
+      Shrub:
+        tradable: false
+        mainMaterial: LONG_GRASS
+        subMaterial: 0
+        salesPrice:
+          price: 0.23000005
+      Grass:
+        mainMaterial: LONG_GRASS
+        subMaterial: 1
+        salesPrice:
+          price: 0.01
+      Fern:
+        mainMaterial: LONG_GRASS
+        subMaterial: 2
+        salesPrice:
+          price: 0.01
+      Dandelion:
+        mainMaterial: YELLOW_FLOWER
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      Poppy:
+        mainMaterial: RED_ROSE
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      BlueOrchid:
+        mainMaterial: RED_ROSE
+        subMaterial: 1
+        salesPrice:
+          price: 0.01
+      Allium:
+        mainMaterial: RED_ROSE
+        subMaterial: 2
+        salesPrice:
+          price: 0.01
+      AzureBluet:
+        mainMaterial: RED_ROSE
+        subMaterial: 3
+        salesPrice:
+          price: 0.01
+      RedTulip:
+        mainMaterial: RED_ROSE
+        subMaterial: 4
+        salesPrice:
+          price: 0.01
+      OrangeTulip:
+        mainMaterial: RED_ROSE
+        subMaterial: 5
+        salesPrice:
+          price: 0.01
+      WhiteTulip:
+        mainMaterial: RED_ROSE
+        subMaterial: 6
+        salesPrice:
+          price: 0.01
+      PinkTulip:
+        mainMaterial: RED_ROSE
+        subMaterial: 7
+        salesPrice:
+          price: 0.01
+      OxeyeDaisy:
+        mainMaterial: RED_ROSE
+        subMaterial: 8
+        salesPrice:
+          price: 0.01
+      Sunflower:
+        mainMaterial: DOUBLE_PLANT
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      Lilac:
+        mainMaterial: DOUBLE_PLANT
+        subMaterial: 1
+        salesPrice:
+          price: 0.01
+      DoubleTallgrass:
+        tradable: false
+        mainMaterial: DOUBLE_PLANT
+        subMaterial: 2
+        salesPrice:
+          price: 171.09999
+      LargeFern:
+        tradable: false
+        mainMaterial: DOUBLE_PLANT
+        subMaterial: 3
+        salesPrice:
+          price: 171.09999
+      RoseBush:
+        mainMaterial: DOUBLE_PLANT
+        subMaterial: 4
+        salesPrice:
+          price: 0.01
+      Peony:
+        mainMaterial: DOUBLE_PLANT
+        subMaterial: 5
+        salesPrice:
+          price: 0.01
+      BrownMushroom:
+        mainMaterial: BROWN_MUSHROOM
+        subMaterial: 0
+        categories:
+        - brewing
+        salesPrice:
+          price: 0.01
+      RedMushroom:
+        mainMaterial: RED_MUSHROOM
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      HugeBrownMushroomFleshy:
+        tradable: false
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.23000005
+      HugeBrownMushroomWN:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 19.54
+      HugeBrownMushroomN:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      HugeBrownMushroomNE:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 3
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      HugeBrownMushroomW:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 4
+        categories:
+        - building
+        salesPrice:
+          price: 109.01
+      HugeBrownMushroomTop:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 5
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      HugeBrownMushroomE:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 6
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      HugeBrownMushroomSW:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 7
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      HugeBrownMushroomS:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 8
+        categories:
+        - building
+        salesPrice:
+          price: 19.28
+      HugeBrownMushroomES:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 9
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      BrownMushroomStem:
+        mainMaterial: HUGE_MUSHROOM_1
+        subMaterial: 10
+        categories:
+        - building
+        salesPrice:
+          price: 19.41
+      HugeRedMushroomFleshy:
+        tradable: false
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 0.23000005
+      HugeRedMushroomWN:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 1
+        categories:
+        - building
+        salesPrice:
+          price: 112.200005
+      HugeRedMushroomN:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 2
+        categories:
+        - building
+        salesPrice:
+          price: 112.200005
+      HugeRedMushroomNE:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 3
+        categories:
+        - building
+        salesPrice:
+          price: 47.03
+      HugeRedMushroomW:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 4
+        categories:
+        - building
+        salesPrice:
+          price: 112.21
+      HugeRedMushroomTop:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 5
+        categories:
+        - building
+        salesPrice:
+          price: 112.21
+      HugeRedMushroomE:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 6
+        categories:
+        - building
+        salesPrice:
+          price: 112.200005
+      HugeRedMushroomSW:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 7
+        categories:
+        - building
+        salesPrice:
+          price: 0.01
+      HugeRedMushroomS:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 8
+        categories:
+        - building
+        salesPrice:
+          price: 47.03
+      HugeRedMushroomES:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 9
+        categories:
+        - building
+        salesPrice:
+          price: 47.019997
+      RedMushroomStem:
+        mainMaterial: HUGE_MUSHROOM_2
+        subMaterial: 10
+        categories:
+        - building
+        salesPrice:
+          price: 112.21
+      MusicDisc13:
+        mainMaterial: GOLD_RECORD
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDisccat:
+        mainMaterial: GREEN_RECORD
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDiscBlocks:
+        mainMaterial: RECORD_3
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDiscChirp:
+        mainMaterial: RECORD_4
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDiscFar:
+        mainMaterial: RECORD_5
+        subMaterial: 0
+        salesPrice:
+          price: 146.93999
+      MusicDiscMall:
+        mainMaterial: RECORD_6
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDiscMellohi:
+        mainMaterial: RECORD_7
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDiscStal:
+        mainMaterial: RECORD_8
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDiscStrad:
+        mainMaterial: RECORD_9
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDiscWard:
+        mainMaterial: RECORD_10
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      BrokenMusicDisc:
+        mainMaterial: RECORD_11
+        subMaterial: 0
+        salesPrice:
+          price: 0.01
+      MusicDiscwait:
+        mainMaterial: RECORD_12
+        subMaterial: 0
+        salesPrice:
+          price: 13.34
+      NetherStar:
+        mainMaterial: NETHER_STAR
+        subMaterial: 0
+        salesPrice:
+          price: 271.31
+      Beacon:
+        mainMaterial: BEACON
+        subMaterial: 0
+        categories:
+        - building
+        salesPrice:
+          price: 215.03
+      DummySpawner:
+        displayCustomMaterialNameInShop: true
+        tradable: false
+        mainMaterial: MOB_SPAWNER
+        subMaterial: 0
+        salesPrice:
+          price: 10.450144
+      SkeletonSpawner:
+        displayCustomMaterialNameInShop: true
+        tradable: false
+        mainMaterial: MOB_SPAWNER
+        subMaterial: 51
+        salesPrice:
+          price: 172.03
+      SpiderSpawner:
+        displayCustomMaterialNameInShop: true
+        tradable: false
+        mainMaterial: MOB_SPAWNER
+        subMaterial: 52
+        salesPrice:
+          price: 143.86
+      ZombieSpawner:
+        displayCustomMaterialNameInShop: true
+        tradable: false
+        mainMaterial: MOB_SPAWNER
+        subMaterial: 54
+        salesPrice:
+          price: 70.32
+      CaveSpiderSpawner:
+        displayCustomMaterialNameInShop: true
+        tradable: false
+        mainMaterial: MOB_SPAWNER
+        subMaterial: 59
+        salesPrice:
+          price: 198.62
+      SilverfishSpawner:
+        displayCustomMaterialNameInShop: true
+        tradable: false
+        mainMaterial: MOB_SPAWNER
+        subMaterial: 60
+        salesPrice:
+          price: 231.09
+      BlazeSpawner:
+        displayCustomMaterialNameInShop: true
+        tradable: false
+        mainMaterial: MOB_SPAWNER
+        subMaterial: 61
+        salesPrice:
+          price: 82.11
+    salesPrice: {}
