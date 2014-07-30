@@ -6,6 +6,8 @@ package me.tubelius.autoprice;
 //import java.util.Map;
 //import java.util.Map.Entry;
 
+import java.util.Arrays;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,6 +21,11 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 //import org.bukkit.inventory.meta.ItemMeta;
 //import org.bukkit.inventory.meta.LeatherArmorMeta;
+
+
+
+
+//import com.google.common.collect.Iterables;
 
 public class Commands implements CommandExecutor {
     //Pointer to the class calling this class     
@@ -65,17 +72,18 @@ public class Commands implements CommandExecutor {
             //loop all shops
             plugin.respondToSender(sender,
                     String.format(plugin.getData.getPlayerMessage("shops", sender.getName()), plugin.getData.getAvailableShops(sender)) );
-        } else if (args.length == 2) {  //Shop named --> try selecting it
-            if (!plugin.getConfig().isConfigurationSection("shops."+args[1]) ) {
+        } else if (args.length >= 2) {  //Got a shop name --> try selecting it
+            String shopName = getShopNameFromArgs(args);
+            if (!plugin.getConfig().isConfigurationSection("shops."+shopName) ) {
                 ChatColor chatColorCommand  = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2") );
                 plugin.respondToSender(sender,plugin.chatColorError+
-                        String.format(plugin.getData.getPlayerMessage("invalidShop", sender.getName()),args[1],chatColorCommand+"/ap select"));
-            } else if (!AutoPrice.permission.has(sender, "autoprice.shops."+args[1]) ) {    //No permission
+                        String.format(plugin.getData.getPlayerMessage("invalidShop", sender.getName()),shopName,chatColorCommand+"/ap select"));
+            } else if (!AutoPrice.permission.has(sender, "autoprice.shops."+shopName) ) {    //No permission
                 plugin.respondToSender(sender,plugin.chatColorError+
-                        String.format(plugin.getData.getPlayerMessage("noShopAccess", sender.getName()),args[1]));
+                        String.format(plugin.getData.getPlayerMessage("noShopAccess", sender.getName()),shopName));
             } else {    //All OK --> select it
-                plugin.getConfig().set("players."+sender.getName()+".shopName",args[1]);
-                plugin.respondToSender(sender, String.format(plugin.getData.getPlayerMessage("selectedShop", sender.getName()),args[1]) );
+                plugin.getConfig().set("players."+sender.getName()+".shopName",shopName);
+                plugin.respondToSender(sender, String.format(plugin.getData.getPlayerMessage("selectedShop", sender.getName()),shopName) );
                 return true;    //successfully selected an active shop
             }
         } else {  //Invalid arguments
@@ -87,6 +95,15 @@ public class Commands implements CommandExecutor {
                     +chatColorCommand+"/ap select "+chatColorParameter+"shopname"+plugin.chatColorError));
         }
         return false;   //shop was not selected
+    }
+
+    private String getShopNameFromArgs(String[] args) {
+        String[] shopNameWords = Arrays.copyOfRange(args, 1, args.length);  //shop name starts from second argument
+        String shopName = "";
+        for (String shopNameWord : shopNameWords) {
+            shopName += " "+shopNameWord;
+        }
+        return shopName.trim();
     }
 
     public void handleName(CommandSender sender, String[] args) {
@@ -220,7 +237,7 @@ public class Commands implements CommandExecutor {
             plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName()));
             return;
         }
-        if (args.length == 2) { //shop name was defined, try selecting it
+        if (args.length >= 2) { //shop name was defined, try selecting it
             if (!setActiveShop(sender,args)) {
                 return; //failed to select a shop
             }
