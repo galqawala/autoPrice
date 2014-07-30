@@ -208,17 +208,33 @@ public class GetData {
     }
 
     public int getAmountToMove(ClickType clickType) {
-        if (clickType == ClickType.LEFT) {
-            return    1;
-        } else if (clickType == ClickType.RIGHT) {
-            return    4;
-        } else if (clickType == ClickType.SHIFT_LEFT) {
-            return    16;
-        } else if (clickType == ClickType.SHIFT_RIGHT) {
-            return    64;
-        } else {
-            return    0;
-        }
+//        plugin.logger.info("click type: "+clickType.toString());
+//        plugin.logger.info("click name: "+clickType.name());
+//        plugin.logger.info("transaction size: "+plugin.getConfig().getInt("transactionSizePerClickType."+clickType.name()
+//                ,   plugin.getConfig().getInt("transactionSizePerClickType.default"))
+//        );
+//        plugin.logger.info("LEFT: "+plugin.getConfig().getInt("transactionSizePerClickType.LEFT",0));
+//        
+        return  plugin.getConfig().getInt("transactionSizePerClickType."+clickType.name().trim());
+//        
+////        transactionSizePerClickType:
+////            left: 1
+////            right: 4
+////            shift_left: 16
+////            shift_right: 64
+////            default: 0        
+//        
+//        if (clickType == ClickType.LEFT) {
+//            return    plugin.getConfig().getInt("transactionSizePerClickType.left");
+//        } else if (clickType == ClickType.RIGHT) {
+//            return    plugin.getConfig().getInt("transactionSizePerClickType.right");
+//        } else if (clickType == ClickType.SHIFT_LEFT) {
+//            return    plugin.getConfig().getInt("transactionSizePerClickType.shift_left");
+//        } else if (clickType == ClickType.SHIFT_RIGHT) {
+//            return    plugin.getConfig().getInt("transactionSizePerClickType.shift_right");
+//        } else {
+//            return    plugin.getConfig().getInt("transactionSizePerClickType.default");
+//        }
     }
 
     public int getMaximumAmountPlayerCanSell(CommandSender sender, String materialConfigPath, ItemStack stack, String shopName) {

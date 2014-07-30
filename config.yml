@@ -29,6 +29,11 @@ shopItemsPerPage: 53
 optionsItemLocation: 53
 matchLores: true
 tooltipPrefix: "[AP]"
+transactionSizePerClickType:
+  LEFT: 1
+  RIGHT: 4
+  SHIFT_LEFT: 16
+  SHIFT_RIGHT: 64
 languages:
   english:
     economyMissing: No economy plugin found using Vault plugin! Shutting down AutoPrice...
