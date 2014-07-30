@@ -161,7 +161,7 @@ public class Configuration {
             List<String> lores = stackInHand.getItemMeta().getLore();
             ArrayList<String> loresForConfig = new ArrayList<String>();
             for (String lore : lores) {
-                if (!lore.startsWith("[AP]") ) {
+                if ( !lore.startsWith(plugin.getData.getPrefix()) ) {
                     loresForConfig.add(lore);
                 }
             }

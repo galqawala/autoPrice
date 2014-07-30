@@ -49,7 +49,7 @@ public class GetData {
                 if (meta.hasLore()) {
                     List<String> loresOriginal = stack.getItemMeta().getLore();
                     for (String lore : loresOriginal) {
-                        if (!lore.startsWith("[AP]")) {
+                        if ( !lore.startsWith(getPrefix()) ) {
                             loresClean.add(lore);
                         }
                     }
@@ -421,7 +421,11 @@ public class GetData {
     }
 
     public String getShopTitle(CommandSender sender, String shopName) {
-        String shopTitle    = plugin.chatColorError+plugin.getData.getPlayerMessage("shopTitle",sender.getName());
+        String shopTitle    = plugin.chatColorError+getPlayerMessage("shopTitle",sender.getName());
         return String.format(shopTitle,shopName);
+    }
+    
+    public String getPrefix() {
+        return  plugin.getConfig().getString("tooltipPrefix");
     }
 }

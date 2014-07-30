@@ -73,7 +73,7 @@ public class Trade {
         //options item (to-do: left click = next page, right click = previous page, shift+LMB = change sorting, shift+RMB = change category)
         ItemStack stack = new ItemStack(Material.LAVA, 1);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName("[AP] "+plugin.getData.getPlayerMessage("options", sender.getName()));
+        meta.setDisplayName(plugin.getData.getPrefix()+" "+plugin.getData.getPlayerMessage("options", sender.getName()));
         //static lores/tooltips
         List<String> lores = new ArrayList<String>();
         String lastPage = plugin.getConfig().getString("temporary.players."+sender.getName()+".shopLastPageNumber", 
@@ -142,7 +142,7 @@ public class Trade {
         } else {
             lores = new ArrayList<String>();
         }
-        if (autoPricePrefix) { lore = "[AP] "+lore; }
+        if (autoPricePrefix) { lore = plugin.getData.getPrefix()+" "+lore; }
         lores.add(lore);
         meta.setLore(lores);
         stack.setItemMeta(meta);
@@ -157,7 +157,7 @@ public class Trade {
             List<String> loresOriginal = stack.getItemMeta().getLore();
             List<String> loresNew = new ArrayList<String>();
             for (String lore : loresOriginal) {
-                if (!lore.startsWith("[AP]")) {
+                if ( !lore.startsWith(plugin.getData.getPrefix()) ) {
                     loresNew.add(lore);
                 }
             }

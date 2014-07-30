@@ -164,7 +164,7 @@ public class AutoPrice extends JavaPlugin implements Listener {
     private ItemStack getShopOptionsItemBack(CommandSender sender) {
         ItemStack stack = new ItemStack(Material.WATER, 1);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName("[AP] "+getData.getPlayerMessage("back", sender.getName()));
+        meta.setDisplayName(getData.getPrefix()+" "+getData.getPlayerMessage("back", sender.getName()));
         stack.setItemMeta(meta);
         return stack;
     }
@@ -172,7 +172,7 @@ public class AutoPrice extends JavaPlugin implements Listener {
     private ItemStack getShopOptionsItemSorting(CommandSender sender) {
         ItemStack stack = new ItemStack(Material.WATER, 1);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName("[AP] "+getData.getPlayerMessage("sorting", sender.getName()));
+        meta.setDisplayName(getData.getPrefix()+" "+getData.getPlayerMessage("sorting", sender.getName()));
         List<String> lores = new ArrayList<String>();
         String sortBy = getConfig().getString("temporary.players."+sender.getName()+".shopSortOrder","default");
         if (sortBy=="sp")       { sortBy = getData.getPlayerMessage("sortingSP", sender.getName()); }
@@ -186,7 +186,7 @@ public class AutoPrice extends JavaPlugin implements Listener {
     private ItemStack getShopOptionsItemCategory(CommandSender sender) {
         ItemStack stack = new ItemStack(Material.WATER, 1);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName("[AP] "+getData.getPlayerMessage("category", sender.getName()));
+        meta.setDisplayName(getData.getPrefix()+" "+getData.getPlayerMessage("category", sender.getName()));
         List<String> lores = new ArrayList<String>();
         String currentCategory = getConfig().getString("temporary.players."+sender.getName()+".category","all");
         lores.add( String.format(getData.getPlayerMessage("optionsCategory", sender.getName()),currentCategory) );
@@ -199,7 +199,7 @@ public class AutoPrice extends JavaPlugin implements Listener {
     private ItemStack getShopOptionsItemFilter(CommandSender sender) {
         ItemStack stack = new ItemStack(Material.WATER, 1);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName("[AP] "+getData.getPlayerMessage("filter", sender.getName()));
+        meta.setDisplayName(getData.getPrefix()+" "+getData.getPlayerMessage("filter", sender.getName()));
         List<String> lores = new ArrayList<String>();
         String filter = getConfig().getString("temporary.players."+sender.getName()+".shopFilter","default");
         String filterText = filter;

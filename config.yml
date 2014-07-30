@@ -1,4 +1,4 @@
-configVersion: '4.076'
+configVersion: '4.077'
 colors:
   command: 2
   normal: f
@@ -28,6 +28,7 @@ defaultPlayerLanguage: english
 shopItemsPerPage: 53
 optionsItemLocation: 53
 matchLores: true
+tooltipPrefix: "[AP]"
 languages:
   english:
     economyMissing: No economy plugin found using Vault plugin! Shutting down AutoPrice...
