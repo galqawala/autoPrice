@@ -27,7 +27,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //Class (AutoPrice Bukkit plugin)
-class AutoPrice extends JavaPlugin implements Listener {     
+public class AutoPrice extends JavaPlugin implements Listener {      // NO_UCD (use default)
     //Public variables (most are loaded from configuration file) 
     public final    Logger      logger          = Logger.getLogger("Minecraft");    //For sending messages to console
     public static   Economy     economy         = null;                             //Vault plugin hook     (to access economy)

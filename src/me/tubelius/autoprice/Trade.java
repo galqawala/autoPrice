@@ -279,7 +279,7 @@ class Trade {
         }
     }
     
-    void sendNotificationsForSale(InventoryClickEvent event, int amountBeingSold, ItemStack stackToSell, float salesUnitPrice, String shopName) {
+    private void sendNotificationsForSale(InventoryClickEvent event, int amountBeingSold, ItemStack stackToSell, float salesUnitPrice, String shopName) {
         //Notification to player
         plugin.respondToSender((CommandSender) event.getWhoClicked(), 
                 String.format(plugin.getData.getConsoleMessage("youSold"), 
