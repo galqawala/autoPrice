@@ -419,4 +419,9 @@ public class GetData {
         }
         return shopList;
     }
+
+    public String getShopTitle(CommandSender sender, String shopName) {
+        String shopTitle    = plugin.chatColorError+plugin.getData.getPlayerMessage("shopTitle",sender.getName());
+        return String.format(shopTitle,shopName);
+    }
 }

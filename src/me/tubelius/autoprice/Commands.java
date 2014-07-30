@@ -226,7 +226,7 @@ public class Commands implements CommandExecutor {
             }
         }
         String shopName         = plugin.getData.getShopForPlayer((HumanEntity) sender);
-        Inventory shopInventory = Bukkit.createInventory((InventoryHolder) sender, 6*9, "AutoPrice shop: "+shopName);
+        Inventory shopInventory = Bukkit.createInventory((InventoryHolder) sender, 6*9, plugin.getData.getShopTitle(sender,shopName));
         ((HumanEntity) sender).openInventory(shopInventory);
         plugin.trade.loadShopPage(sender,shopInventory,"1",shopName);
         plugin.trade.setShopInfoOnStacks(shopInventory,true,true,shopName,sender);

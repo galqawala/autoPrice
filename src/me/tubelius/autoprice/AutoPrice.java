@@ -93,8 +93,9 @@ public class AutoPrice extends JavaPlugin implements Listener {
         if (event.getInventory()    == null) { return; }    //Player clicked outside inventory --> quit
         if (event.getCurrentItem()  == null) { return; }    //Player clicked outside inventory --> quit
         
-        if (event.getInventory().getName().startsWith("AutoPrice shop")) {          //Player is in shop
-            String shopName    = getData.getShopForPlayer(event.getWhoClicked());   //Get shop name for specific player
+        String shopName    = getData.getShopForPlayer(event.getWhoClicked());   //Get shop name for specific player
+        if (event.getInventory().getName().equalsIgnoreCase(getData.getShopTitle((CommandSender) event.getWhoClicked(),shopName))) {
+            //Player is in shop
             event.setCancelled(true);                                               //Don't let player move anything while in shop
             if (event.getCurrentItem().getType() == Material.LAVA) {                //Options item was clicked
                 processOptionsItemClick(event,shopName);

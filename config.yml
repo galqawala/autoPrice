@@ -1,4 +1,4 @@
-configVersion: '4.074'
+configVersion: '4.075'
 colors:
   command: 2
   normal: f
@@ -82,6 +82,7 @@ languages:
     filterNoStock: "only items without stock"
     filterHasStock: "only items with stock"
     filterNotSet: "display all"
+    shopTitle: "AutoPrice shop: %s"
   suomi:
     economyMissing: "Valuuttapluginia ei l\xf6ytynyt Vault pluginin kautta! AutoPrice\
       \ sammuu..."
@@ -140,6 +141,7 @@ languages:
     filterNoStock: "vain 0-saldolliset"
     filterHasStock: "vain saldolliset"
     filterNotSet: "näytä kaikki"
+    shopTitle: "AutoPrice-kauppa: %s"
 shops:
   default:
     categories:
