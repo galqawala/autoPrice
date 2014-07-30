@@ -184,8 +184,8 @@ public class Configuration {
                 //main material matches -> item uses durability or sub material in durability value matches configuration 
                 if (stack.getType().getMaxDurability() > 0 || 
                         stack.getDurability() == plugin.getConfig().getInt(materialPath+".subMaterial")) {
-                    //main&sub materials match -> check/match lores
-                    if (plugin.getData.loresMatch(materialPath,stack)) {
+                    //main&sub materials match -> check/match lores if requested
+                    if (plugin.getData.loresMatch(materialPath,stack) || !getMaterialConfigBoolean(shopName, materialPath, "matchLores")) {
                         return  materialPath;   //current material matches the stack, return the path of current material
                     }
                 }
@@ -207,6 +207,14 @@ public class Configuration {
             plugin.getConfig().getInt(materialPath+"."+node             //Primarily use material config
             ,   plugin.getConfig().getInt("shops."+shopName+"."+node    //If missing use shop config
                 ,   plugin.getConfig().getInt(node)                     //If missing use root (global default)
+                )
+            );
+    }
+    public boolean getMaterialConfigBoolean(String shopName, String materialPath, String node) {
+        return 
+            plugin.getConfig().getBoolean(materialPath+"."+node          //Primarily use material config
+            ,   plugin.getConfig().getBoolean("shops."+shopName+"."+node //If missing use shop config
+                ,   plugin.getConfig().getBoolean(node)                  //If missing use root (global default)
                 )
             );
     }

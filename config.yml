@@ -1,4 +1,4 @@
-configVersion: '4.070'
+configVersion: '4.071'
 colors:
   command: 2
   normal: f
@@ -27,6 +27,7 @@ consoleLanguage: english
 defaultPlayerLanguage: english
 shopItemsPerPage: 53
 optionsItemLocation: 53
+matchLores: true
 languages:
   english:
     economyMissing: No economy plugin found using Vault plugin! Shutting down AutoPrice...
