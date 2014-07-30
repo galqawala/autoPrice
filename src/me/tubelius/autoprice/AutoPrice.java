@@ -1,6 +1,8 @@
 package me.tubelius.autoprice;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -8,6 +10,14 @@ import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
+
+
+
+
+
+
+
+//import org.apache.commons.lang.math.NumberUtils;
 //import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -19,8 +29,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
+//import org.bukkit.RegisteredServiceProvider;
+//import org.bukkit.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //Class (AutoPrice Bukkit plugin)
@@ -83,7 +97,9 @@ public class AutoPrice extends JavaPlugin implements Listener {
             String shopName    = getData.getShopForPlayer(event.getWhoClicked());   //Get shop name for specific player
             event.setCancelled(true);                                               //Don't let player move anything while in shop
             if (event.getCurrentItem().getType() == Material.LAVA) {                //Options item was clicked
-                handleShopOptionsClick(event,shopName);
+                processOptionsItemClick(event,shopName);
+            } else if (event.getCurrentItem().getType() == Material.WATER) {        //Item in options was clicked
+                processOptionsClick(event,shopName);
             } else if (event.getRawSlot() < 54) {                                   //Player clicked a slot of the shop
                 if (event.getCurrentItem().getAmount() > 0) {                       //Empty slot
                     trade.processPlayerPurchase(event, shopName);    //Player buying
@@ -96,26 +112,105 @@ public class AutoPrice extends JavaPlugin implements Listener {
         } 
     }   
 
-    private void handleShopOptionsClick(InventoryClickEvent event, String shopName) {
+    private void processOptionsItemClick(InventoryClickEvent event, String shopName) {
         int pageToLoad  = getConfig().getInt("temporary.players."+event.getWhoClicked().getName()+".shopCurrentPageNumber",1);
         if (event.getClick() == ClickType.LEFT) {
             //load next page
             if (pageToLoad < getConfig().getInt("temporary.players."+event.getWhoClicked().getName()+".shopLastPageNumber",Integer.MAX_VALUE)) {
                 pageToLoad += 1;
             }
+            trade.loadShopPage((CommandSender) event.getWhoClicked(), event.getInventory(), Integer.toString(pageToLoad), shopName);
         } else if (event.getClick() == ClickType.RIGHT) {
             //load previous page
             if (pageToLoad > 1) {
                 pageToLoad -= 1;
             }
+            trade.loadShopPage((CommandSender) event.getWhoClicked(), event.getInventory(), Integer.toString(pageToLoad), shopName);
         } else if (event.getClick() == ClickType.SHIFT_LEFT) {
-            changeSorting(event.getWhoClicked().getName());
-        } else if (event.getClick() == ClickType.SHIFT_RIGHT) {
-            changeCategory(event.getWhoClicked().getName(),shopName);
+            openOptionsPage((CommandSender) event.getWhoClicked(), event.getInventory(), shopName);
         }
-        trade.loadShopPage((CommandSender) event.getWhoClicked(), event.getInventory(), Integer.toString(pageToLoad), shopName);
+        
+    }
+    
+    private void processOptionsClick(InventoryClickEvent event, String shopName) {
+        switch (event.getRawSlot()) {
+            case 0: //back
+                int pageToLoad  = getConfig().getInt("temporary.players."+event.getWhoClicked().getName()+".shopCurrentPageNumber",1);
+                trade.loadShopPage((CommandSender) event.getWhoClicked(), event.getInventory(), Integer.toString(pageToLoad), shopName);
+                return;
+            case 1: //sorting
+                changeSorting(event.getWhoClicked().getName());
+                break;
+            case 2: //category  
+                changeCategory(event.getWhoClicked().getName(), shopName);
+                break;
+            case 3: //filter 
+                changeFilter(event.getWhoClicked().getName());
+                break;
+        }
+        //refresh
+        openOptionsPage((CommandSender) event.getWhoClicked(), event.getInventory(), shopName);
     }
 
+    private void openOptionsPage(CommandSender sender, Inventory shopInventory, String shopName) {
+        shopInventory.clear();
+        shopInventory.setItem(0 , getShopOptionsItemBack(sender));
+        shopInventory.setItem(1 , getShopOptionsItemSorting(sender));
+        shopInventory.setItem(2 , getShopOptionsItemCategory(sender));
+        shopInventory.setItem(3 , getShopOptionsItemFilter(sender));
+    }
+
+    private ItemStack getShopOptionsItemBack(CommandSender sender) {
+        ItemStack stack = new ItemStack(Material.WATER, 1);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName("[AP] "+getData.getPlayerMessage("back", sender.getName()));
+        stack.setItemMeta(meta);
+        return stack;
+    }
+    
+    private ItemStack getShopOptionsItemSorting(CommandSender sender) {
+        ItemStack stack = new ItemStack(Material.WATER, 1);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName("[AP] "+getData.getPlayerMessage("sorting", sender.getName()));
+        List<String> lores = new ArrayList<String>();
+        String sortBy = getConfig().getString("temporary.players."+sender.getName()+".shopSortOrder","default");
+        if (sortBy=="sp")       { sortBy = getData.getPlayerMessage("sortingSP", sender.getName()); }
+        else if (sortBy=="pp")  { sortBy = getData.getPlayerMessage("sortingPP", sender.getName()); }
+        lores.add( String.format(getData.getPlayerMessage("optionsSorting", sender.getName()),sortBy) );
+        meta.setLore(lores);
+        stack.setItemMeta(meta);
+        return stack;
+    }
+    
+    private ItemStack getShopOptionsItemCategory(CommandSender sender) {
+        ItemStack stack = new ItemStack(Material.WATER, 1);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName("[AP] "+getData.getPlayerMessage("category", sender.getName()));
+        List<String> lores = new ArrayList<String>();
+        String currentCategory = getConfig().getString("temporary.players."+sender.getName()+".category","all");
+        lores.add( String.format(getData.getPlayerMessage("optionsCategory", sender.getName()),currentCategory) );
+//        lores.addAll( getData.getPlayerLanguageStringList("optionsLores", sender.getName()) );
+        meta.setLore(lores);
+        stack.setItemMeta(meta);
+        return stack;
+    }
+    
+    private ItemStack getShopOptionsItemFilter(CommandSender sender) {
+        ItemStack stack = new ItemStack(Material.WATER, 1);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName("[AP] "+getData.getPlayerMessage("filter", sender.getName()));
+        List<String> lores = new ArrayList<String>();
+        String filter = getConfig().getString("temporary.players."+sender.getName()+".shopFilter","default");
+        String filterText = filter;
+        if (filter=="noStock")          { filterText = getData.getPlayerMessage("filterNoStock",    sender.getName()); }
+        else if (filter=="hasStock")    { filterText = getData.getPlayerMessage("filterHasStock",   sender.getName()); }
+        else                            { filterText = getData.getPlayerMessage("filterNotSet",     sender.getName()); }
+        lores.add( String.format(getData.getPlayerMessage("optionsFilter", sender.getName()),filterText) );
+        meta.setLore(lores);
+        stack.setItemMeta(meta);
+        return stack;
+    }
+    
     private void changeCategory(String playerName, String shopName) {
         //change sorting (all --> custom categories --> uncategorized --> all)
         String currentCategory = getConfig().getString("temporary.players."+playerName+".category","all");
@@ -155,6 +250,22 @@ public class AutoPrice extends JavaPlugin implements Listener {
                 break;
             default: 
                 getConfig().set("temporary.players."+playerName+".shopSortOrder","pp");
+                break;
+        }
+    }
+    
+    private void changeFilter(String playerName) {
+        //change filtering
+        String filter = getConfig().getString("temporary.players."+playerName+".shopFilter","");
+        switch (filter) {
+            case "hasStock":
+                getConfig().set("temporary.players."+playerName+".shopFilter","noStock");
+                break;
+            case "noStock":  
+                getConfig().set("temporary.players."+playerName+".shopFilter",null);
+                break;
+            default: 
+                getConfig().set("temporary.players."+playerName+".shopFilter","hasStock");
                 break;
         }
     }

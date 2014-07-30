@@ -1,4 +1,4 @@
-configVersion: '4.072'
+configVersion: '4.074'
 colors:
   command: 2
   normal: f
@@ -68,13 +68,20 @@ languages:
     optionsPage: "\xa77Page: %s / %s"
     optionsSorting: "\xa77Sorting: %s"
     optionsCategory: "\xa77Category: %s"
+    optionsFilter: "\xa77Filter: %s"
     optionsLores:
     - 'left click: next page'
     - 'right click: previous page'
-    - 'shift+LMB: change sorting'
-    - 'shift+RMB: change category'
+    - 'shift+LMB: go to options'
     sortingSP: sales price (descending)
     sortingPP: purchase price (ascending)
+    back: "back"
+    sorting: "sorting"
+    category: "category"
+    filter: "filter"
+    filterNoStock: "only items without stock"
+    filterHasStock: "only items with stock"
+    filterNotSet: "display all"
   suomi:
     economyMissing: "Valuuttapluginia ei l\xf6ytynyt Vault pluginin kautta! AutoPrice\
       \ sammuu..."
@@ -119,13 +126,20 @@ languages:
     optionsPage: "\xa77Sivu: %s / %s"
     optionsSorting: "\xa77Lajittelu: %s"
     optionsCategory: "\xa77Kategoria: %s"
+    optionsFilter: "\xa77Suodatus: %s"
     optionsLores:
     - 'hiiren vasen: seuraava sivu'
     - 'hiiren oikea: edellinen sivu'
-    - 'shift+vasen: vaihda lajittelu'
-    - 'shift+oikea: vaihda kategoria'
+    - 'shift+vasen: mene asetuksiin'
     sortingSP: myyntihinta (laskeva)
     sortingPP: ostohinta (nouseva)
+    back: "takaisin"
+    sorting: "lajittelu"
+    category: "kategoria"
+    filter: "suodatus"
+    filterNoStock: "vain 0-saldolliset"
+    filterHasStock: "vain saldolliset"
+    filterNotSet: "näytä kaikki"
 shops:
   default:
     categories:

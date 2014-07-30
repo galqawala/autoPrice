@@ -84,9 +84,17 @@ public class Trade {
         if (sortBy=="sp")       { sortBy = plugin.getData.getPlayerMessage("sortingSP", sender.getName()); }
         else if (sortBy=="pp")  { sortBy = plugin.getData.getPlayerMessage("sortingPP", sender.getName()); }
         lores.add( String.format(plugin.getData.getPlayerMessage("optionsSorting", sender.getName()),sortBy) );
-        //category & update
+        //category
         String currentCategory = plugin.getConfig().getString("temporary.players."+sender.getName()+".category","all");
         lores.add( String.format(plugin.getData.getPlayerMessage("optionsCategory", sender.getName()),currentCategory) );
+        //filter
+        String filter = plugin.getConfig().getString("temporary.players."+sender.getName()+".shopFilter","default");
+        String filterText = filter;
+        if (filter=="noStock")          { filterText = plugin.getData.getPlayerMessage("filterNoStock",    sender.getName()); }
+        else if (filter=="hasStock")    { filterText = plugin.getData.getPlayerMessage("filterHasStock",   sender.getName()); }
+        else                            { filterText = plugin.getData.getPlayerMessage("filterNotSet",     sender.getName()); }
+        lores.add( String.format(plugin.getData.getPlayerMessage("optionsFilter", sender.getName()),filterText) );
+        //update
         lores.addAll( plugin.getData.getPlayerLanguageStringList("optionsLores", sender.getName()) );
         meta.setLore(lores);
         stack.setItemMeta(meta);
@@ -217,7 +225,8 @@ public class Trade {
                 if (remove) {
                     removeAutoPriceLores(stack);     
                 }
-                if (add && stack.getType() != Material.LAVA) {  //Add purchase info unless it's the options item
+                //Add purchase info unless it's the options item
+                if (add && stack.getType() != Material.LAVA && stack.getType() != Material.WATER) {  
                     addPurchaseInfo(stack, shopName, sender.getName());         
                 }
             }

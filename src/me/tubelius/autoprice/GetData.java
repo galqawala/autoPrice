@@ -70,20 +70,40 @@ public class GetData {
         }
     }
     
-    public float getTotalStockAmount(ItemStack stack, String shopName) {
+//    public float getTotalStockAmount(ItemStack stack, String shopName) {
+//        return getTotalStockAmount(plugin.configuration.getStackConfigPath(stack, shopName));
+//    }
+//    
+//    public float getTotalStockAmount(String materialConfigPath) {
+//        //Total stock amount for given sub material
+//        float stock = 0;
+//
+//        if (plugin.getConfig().isConfigurationSection(materialConfigPath+".stockPerPurchasePrice")) {
+//            //Has stock for some purchase prices --> loop and find cheapest stock
+//            for (String purchasePrice : 
+//                plugin.getConfig().getConfigurationSection(materialConfigPath+".stockPerPurchasePrice").getKeys(false)) {
+//                //Drop decimals (double --> integer --> float)
+//                stock += (float) (int) plugin.getConfig().getDouble(materialConfigPath+".stockPerPurchasePrice."+purchasePrice,0);
+//            }
+//        }
+//        
+//        return stock;
+//    }
+    
+    public int getTotalStockAmount(ItemStack stack, String shopName) {
         return getTotalStockAmount(plugin.configuration.getStackConfigPath(stack, shopName));
     }
     
-    public float getTotalStockAmount(String materialConfigPath) {
+    public int getTotalStockAmount(String materialConfigPath) {
         //Total stock amount for given sub material
-        float stock = 0;
+        int stock = 0;
 
         if (plugin.getConfig().isConfigurationSection(materialConfigPath+".stockPerPurchasePrice")) {
             //Has stock for some purchase prices --> loop and find cheapest stock
             for (String purchasePrice : 
                 plugin.getConfig().getConfigurationSection(materialConfigPath+".stockPerPurchasePrice").getKeys(false)) {
-                //Drop decimals (double --> integer --> float)
-                stock += (float) (int) plugin.getConfig().getDouble(materialConfigPath+".stockPerPurchasePrice."+purchasePrice,0);
+                //Drop decimals (double --> integer)
+                stock += (int) plugin.getConfig().getDouble(materialConfigPath+".stockPerPurchasePrice."+purchasePrice,0);
             }
         }
         
@@ -240,7 +260,9 @@ public class GetData {
         for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
             String materialPath     =   "shops."+shopName+".materials."+materialNode;
             String mainMaterialName =   plugin.getConfig().getString(materialPath+".mainMaterial");
-            if (isValidMaterialName(mainMaterialName) && materialInRequestedCategory(sender,materialPath)) {
+            if (isValidMaterialName(mainMaterialName) && materialInRequestedCategory(sender,materialPath) 
+                    && materialMatchesFilter(sender,materialPath)) {
+                
                 if (plugin.getConfig().getBoolean(materialPath+".tradable",true)) {
                     tradableSubMaterials[itemIndex][0] = mainMaterialName;
                     tradableSubMaterials[itemIndex][1] = plugin.getConfig().getString(materialPath+".subMaterial");
@@ -278,7 +300,24 @@ public class GetData {
         } 
         return  false;
     }
-
+    
+    private boolean materialMatchesFilter(CommandSender sender, String materialPath) {
+        if (sender == null) {   
+            return  true;   
+        } 
+        String filter = plugin.getConfig().getString("temporary.players."+sender.getName()+".shopFilter");
+        if (filter == null) { 
+            return  true; 
+        }
+        int stockAmount = getTotalStockAmount(materialPath);
+        if (filter == "hasStock" && stockAmount >= 1) { 
+            return  true; 
+        } else if (filter == "noStock" && stockAmount < 1) { 
+            return  true; 
+        } 
+        return  false;
+    }
+    
     public String[][] addPageNumbersToMaterialList(CommandSender sender, String[][] tradableSubMaterials, String shopName) {
         int shopItemsPerPage   =   plugin.getConfig().getInt("shops."+shopName+".shopItemsPerPage" , plugin.getConfig().getInt("shopItemsPerPage"));
         int itemNo             =   0;
