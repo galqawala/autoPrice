@@ -1,29 +1,26 @@
 package me.tubelius.autoprice;
 
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.List;
-
 import net.milkbowl.vault.economy.EconomyResponse;
-
 import org.apache.commons.lang.math.NumberUtils;
+
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-//import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-public class Trade {
+class Trade {
     //Pointer to the class calling this class     
     private AutoPrice plugin;        
     public Trade(AutoPrice plugin) { this.plugin = plugin; }
 
-    public void addStockForPurchasePrice(ItemStack stack, float purchasePrice, float amountToAdd, String shopName) {
+    void addStockForPurchasePrice(ItemStack stack, float purchasePrice, float amountToAdd, String shopName) {
         String configPath = plugin.configuration.getStackConfigPath(stack, shopName);
         
         float stockAmount = plugin.getData.getStockForPurchasePrice(configPath,purchasePrice);
@@ -36,7 +33,7 @@ public class Trade {
         }
     }
 
-    public void loadShopPage(CommandSender sender, Inventory shopInventory, String pageNumberToLoad, String shopName) {
+    void loadShopPage(CommandSender sender, Inventory shopInventory, String pageNumberToLoad, String shopName) {
         shopInventory.clear();
         String[][] materials = plugin.getData.getTradableSubMaterials(sender, shopName);    //updates page count too
         shopInventory.setItem(plugin.getConfig().getInt("shops."+shopName+".optionsItemLocation" , plugin.getConfig().getInt("optionsItemLocation"))
@@ -148,7 +145,7 @@ public class Trade {
         stack.setItemMeta(meta);
     }
 
-    void removeAutoPriceLores(ItemStack stack) {
+    private void removeAutoPriceLores(ItemStack stack) {
         if (stack == null) { return; }
         ItemMeta meta = stack.getItemMeta();
         if (meta == null) { return; }
@@ -168,7 +165,7 @@ public class Trade {
         }
     }    
     
-    public void addPurchaseInfo(ItemStack stack, String shopName, String playerName) {
+    private void addPurchaseInfo(ItemStack stack, String shopName, String playerName) {
         //Add custom material name as a lore?
         if (plugin.getConfig().getBoolean(plugin.configuration.getStackConfigPath(stack,shopName)+".displayCustomMaterialNameInShop",
                 plugin.getConfig().getBoolean("displayCustomMaterialNameInShop",false))) {
@@ -190,7 +187,7 @@ public class Trade {
         ),true);
     } 
     
-    public void addSalesInfo(ItemStack stack, String shopName, String playerName) {
+    private void addSalesInfo(ItemStack stack, String shopName, String playerName) {
         //Skip if not tradable
         if (!plugin.getData.isTradable(stack,shopName)) { return; }
         
@@ -217,7 +214,7 @@ public class Trade {
         }
     }
     
-    public void setShopInfoOnStacks(Inventory inventory, boolean remove, boolean add, String shopName, CommandSender sender) {
+    void setShopInfoOnStacks(Inventory inventory, boolean remove, boolean add, String shopName, CommandSender sender) {
         if (inventory == null) { return; }
         //Loop shop inventory
         for (ItemStack stack : inventory.getContents()) {
@@ -247,7 +244,7 @@ public class Trade {
         }
     }
 
-    public void processPlayerSales(InventoryClickEvent event, String shopName) {
+    void processPlayerSales(InventoryClickEvent event, String shopName) {
 //        What is being sold and how much?
         ItemStack stackToSell    = event.getCurrentItem();
 //        Selling more than you have there?
@@ -267,7 +264,22 @@ public class Trade {
         }
     }
     
-    public void finishPlayerSales(InventoryClickEvent event, int amountBeingSold, ItemStack stackToSell, float salesUnitPrice, String shopName) {
+    private void finishPlayerSales(InventoryClickEvent event, int amountBeingSold, ItemStack stackToSell, float salesUnitPrice, String shopName) {
+        sendNotificationsForSale(event, amountBeingSold, stackToSell, salesUnitPrice, shopName);
+        //Update item info
+        plugin.updateItem(false, amountBeingSold, stackToSell, salesUnitPrice, shopName);
+        //Refresh current shop page
+        loadShopPage((CommandSender) event.getWhoClicked(), event.getView().getTopInventory(), 
+            plugin.getConfig().getString("temporary.players."+event.getWhoClicked().getName()+".shopCurrentPageNumber","1"), shopName);
+        //Remove item
+        if (stackToSell.getAmount()-amountBeingSold > 0) {
+            stackToSell.setAmount(stackToSell.getAmount()-amountBeingSold);
+        } else {
+            event.getView().getBottomInventory().removeItem(stackToSell);
+        }
+    }
+    
+    void sendNotificationsForSale(InventoryClickEvent event, int amountBeingSold, ItemStack stackToSell, float salesUnitPrice, String shopName) {
         //Notification to player
         plugin.respondToSender((CommandSender) event.getWhoClicked(), 
                 String.format(plugin.getData.getConsoleMessage("youSold"), 
@@ -290,20 +302,9 @@ public class Trade {
                     )
             );
         }
-        //Update item info
-        plugin.updateItem(false, amountBeingSold, stackToSell, salesUnitPrice, shopName);
-        //Refresh current shop page
-        loadShopPage((CommandSender) event.getWhoClicked(), event.getView().getTopInventory(), 
-            plugin.getConfig().getString("temporary.players."+event.getWhoClicked().getName()+".shopCurrentPageNumber","1"), shopName);
-        //Remove item
-        if (stackToSell.getAmount()-amountBeingSold > 0) {
-            stackToSell.setAmount(stackToSell.getAmount()-amountBeingSold);
-        } else {
-            event.getView().getBottomInventory().removeItem(stackToSell);
-        }
     }
     
-    public void processPlayerPurchase(InventoryClickEvent event, String shopName) {
+    void processPlayerPurchase(InventoryClickEvent event, String shopName) {
         //What is being bought and how much?
         ItemStack stackToBuy    = event.getCurrentItem();
         int amountBeingBought     = plugin.getData.getAmountToMove( event.getClick() );
@@ -325,7 +326,7 @@ public class Trade {
         }
     }
     
-    public void finishPlayerPurchase(InventoryClickEvent event, int amountBeingBought, ItemStack stackToBuy, float purchaseUnitPrice, String shopName) {
+    private void finishPlayerPurchase(InventoryClickEvent event, int amountBeingBought, ItemStack stackToBuy, float purchaseUnitPrice, String shopName) {
         //Notification to player
         plugin.respondToSender((CommandSender) event.getWhoClicked(), 
                 String.format(plugin.getData.getConsoleMessage("youBought"), 

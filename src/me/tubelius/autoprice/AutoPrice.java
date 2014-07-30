@@ -1,8 +1,8 @@
 package me.tubelius.autoprice;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-//import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -10,15 +10,6 @@ import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
-
-
-
-
-
-
-
-//import org.apache.commons.lang.math.NumberUtils;
-//import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -33,12 +24,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
-//import org.bukkit.RegisteredServiceProvider;
-//import org.bukkit.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //Class (AutoPrice Bukkit plugin)
-public class AutoPrice extends JavaPlugin implements Listener {     
+class AutoPrice extends JavaPlugin implements Listener {     
     //Public variables (most are loaded from configuration file) 
     public final    Logger      logger          = Logger.getLogger("Minecraft");    //For sending messages to console
     public static   Economy     economy         = null;                             //Vault plugin hook     (to access economy)
@@ -89,7 +78,7 @@ public class AutoPrice extends JavaPlugin implements Listener {
 
     @SuppressWarnings("deprecation")
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
+    public void onInventoryClick(InventoryClickEvent event) { // NO_UCD (unused code)
         if (event.getInventory()    == null) { return; }    //Player clicked outside inventory --> quit
         if (event.getCurrentItem()  == null) { return; }    //Player clicked outside inventory --> quit
         
@@ -100,7 +89,7 @@ public class AutoPrice extends JavaPlugin implements Listener {
             if (event.getCurrentItem().getType() == Material.LAVA) {                //Options item was clicked
                 processOptionsItemClick(event,shopName);
             } else if (event.getCurrentItem().getType() == Material.WATER) {        //Item in options was clicked
-                processOptionsClick(event,shopName);
+                processOptionsPageClick(event,shopName);
             } else if (event.getRawSlot() < 54) {                                   //Player clicked a slot of the shop
                 if (event.getCurrentItem().getAmount() > 0) {                       //Empty slot
                     trade.processPlayerPurchase(event, shopName);    //Player buying
@@ -133,7 +122,7 @@ public class AutoPrice extends JavaPlugin implements Listener {
         
     }
     
-    private void processOptionsClick(InventoryClickEvent event, String shopName) {
+    private void processOptionsPageClick(InventoryClickEvent event, String shopName) {
         switch (event.getRawSlot()) {
             case 0: //back
                 int pageToLoad  = getConfig().getInt("temporary.players."+event.getWhoClicked().getName()+".shopCurrentPageNumber",1);
@@ -155,10 +144,10 @@ public class AutoPrice extends JavaPlugin implements Listener {
 
     private void openOptionsPage(CommandSender sender, Inventory shopInventory, String shopName) {
         shopInventory.clear();
-        shopInventory.setItem(0 , getShopOptionsItemBack(sender));
-        shopInventory.setItem(1 , getShopOptionsItemSorting(sender));
-        shopInventory.setItem(2 , getShopOptionsItemCategory(sender));
-        shopInventory.setItem(3 , getShopOptionsItemFilter(sender));
+        shopInventory.setItem(0 , getShopOptionsItemBack(sender));      //back
+        shopInventory.setItem(1 , getShopOptionsItemSorting(sender));   //sorting
+        shopInventory.setItem(2 , getShopOptionsItemCategory(sender));  //category
+        shopInventory.setItem(3 , getShopOptionsItemFilter(sender));    //filter
     }
 
     private ItemStack getShopOptionsItemBack(CommandSender sender) {
@@ -190,7 +179,6 @@ public class AutoPrice extends JavaPlugin implements Listener {
         List<String> lores = new ArrayList<String>();
         String currentCategory = getConfig().getString("temporary.players."+sender.getName()+".category","all");
         lores.add( String.format(getData.getPlayerMessage("optionsCategory", sender.getName()),currentCategory) );
-//        lores.addAll( getData.getPlayerLanguageStringList("optionsLores", sender.getName()) );
         meta.setLore(lores);
         stack.setItemMeta(meta);
         return stack;
@@ -273,13 +261,13 @@ public class AutoPrice extends JavaPlugin implements Listener {
 
     @SuppressWarnings("deprecation")
     @EventHandler
-    public void onInventoryCloseEvent(InventoryCloseEvent event) {
+    public void onInventoryCloseEvent(InventoryCloseEvent event) { // NO_UCD (unused code)
         String shopName    = getData.getShopForPlayer(event.getPlayer());
         trade.setShopInfoOnStacks(event.getInventory(),true,false,shopName,(CommandSender) event.getPlayer());    //Remove lores
         ((Player) event.getPlayer()).updateInventory();
     }
 
-    public void respondToSender(CommandSender sender, String message) {
+    void respondToSender(CommandSender sender, String message) {
         //Send a response to the command sender
         if (sender instanceof ConsoleCommandSender || sender instanceof Player) {
             //Sender is a console or player --> send the message
@@ -299,7 +287,7 @@ public class AutoPrice extends JavaPlugin implements Listener {
         return economy != null;         //Return true if economy is not null and false if it is
     }
     
-    public void updateItem(boolean isPlayerBuying, int amountTraded, ItemStack stack, float unitPrice, String shopName) {
+    void updateItem(boolean isPlayerBuying, int amountTraded, ItemStack stack, float unitPrice, String shopName) {
         //Updates item(material) data/statistics
         String materialConfigPath = configuration.getStackConfigPath(stack, shopName);
         
@@ -335,22 +323,22 @@ public class AutoPrice extends JavaPlugin implements Listener {
         return (permission != null);
     }
     
-    public String formatStockAmount(int stockAmount) {
-        //Format stock amount (add colors)
-        if (stockAmount > 0) {                                      //Amount is positive
-            return ChatColor.GREEN+""+stockAmount+chatColorNormal;  //Add green color
-        } else {                                                    //Amount is not positive
-            return ChatColor.RED+""+stockAmount+chatColorNormal;    //Add red color
-        }
-    }
+//    public String formatStockAmount(int stockAmount) {
+//        //Format stock amount (add colors)
+//        if (stockAmount > 0) {                                      //Amount is positive
+//            return ChatColor.GREEN+""+stockAmount+chatColorNormal;  //Add green color
+//        } else {                                                    //Amount is not positive
+//            return ChatColor.RED+""+stockAmount+chatColorNormal;    //Add red color
+//        }
+//    }
     
-    public String formatPrice(float price, char decimalSeparator, char groupingSeparator, 
+    String formatPrice(float price, char decimalSeparator, char groupingSeparator, 
             boolean separatorsFromConfig, boolean grouping, boolean foreZeroes) {
         
         return    formatPrice((double) price, decimalSeparator, groupingSeparator, separatorsFromConfig, grouping, foreZeroes);
     }
     
-    public String formatPrice(double price, char decimalSeparator, char groupingSeparator, 
+    String formatPrice(double price, char decimalSeparator, char groupingSeparator, 
             boolean separatorsFromConfig, boolean grouping, boolean foreZeroes) {
         
         if (separatorsFromConfig == true ) {

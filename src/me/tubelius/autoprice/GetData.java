@@ -11,26 +11,25 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
 
-public class GetData {
+class GetData {
     //Pointer to the class calling this class
     private AutoPrice plugin;    
-    public GetData(AutoPrice plugin) {
+    GetData(AutoPrice plugin) {
         this.plugin = plugin;
     }
 
     private String getInternalMaterialName(String materialConfigPath) {
         return materialConfigPath.split("\\.")[3];
     }
-    public String getInternalMaterialName(ItemStack stack, String shopName) {
+    String getInternalMaterialName(ItemStack stack, String shopName) {
         return getInternalMaterialName(plugin.configuration.getStackConfigPath(stack,shopName));
     }
 
-    public float getStackConditionMultiplier(ItemStack stack) {
+    float getStackConditionMultiplier(ItemStack stack) {
         //Returns the condition value of a stack (for example: 0.1 = 10% left and 1 = no damage)
         if (stack.getType().getMaxDurability()>0) {                                 //Material uses durability
             float damage = (float) stack.getDurability();                           //Get amount of damage/durability in the item
@@ -59,7 +58,7 @@ public class GetData {
         return loresClean.equals(plugin.getConfig().getStringList(materialPath+".lores"));
     }
 
-    public String getMessagePrefix(Boolean colors) {
+    String getMessagePrefix(Boolean colors) {
         //Prefix added to all messages the plugin sends
         PluginDescriptionFile pluginDescription = plugin.getDescription();    //Access the plugin description file
         if (colors) {    //Colors are allowed
@@ -70,31 +69,11 @@ public class GetData {
         }
     }
     
-//    public float getTotalStockAmount(ItemStack stack, String shopName) {
-//        return getTotalStockAmount(plugin.configuration.getStackConfigPath(stack, shopName));
-//    }
-//    
-//    public float getTotalStockAmount(String materialConfigPath) {
-//        //Total stock amount for given sub material
-//        float stock = 0;
-//
-//        if (plugin.getConfig().isConfigurationSection(materialConfigPath+".stockPerPurchasePrice")) {
-//            //Has stock for some purchase prices --> loop and find cheapest stock
-//            for (String purchasePrice : 
-//                plugin.getConfig().getConfigurationSection(materialConfigPath+".stockPerPurchasePrice").getKeys(false)) {
-//                //Drop decimals (double --> integer --> float)
-//                stock += (float) (int) plugin.getConfig().getDouble(materialConfigPath+".stockPerPurchasePrice."+purchasePrice,0);
-//            }
-//        }
-//        
-//        return stock;
-//    }
-    
-    public int getTotalStockAmount(ItemStack stack, String shopName) {
+    int getTotalStockAmount(ItemStack stack, String shopName) {
         return getTotalStockAmount(plugin.configuration.getStackConfigPath(stack, shopName));
     }
     
-    public int getTotalStockAmount(String materialConfigPath) {
+    int getTotalStockAmount(String materialConfigPath) {
         //Total stock amount for given sub material
         int stock = 0;
 
@@ -110,20 +89,20 @@ public class GetData {
         return stock;
     }
     
-    public float getStockForPurchasePrice(String configDataPath, float purchasePrice) {
+    float getStockForPurchasePrice(String configDataPath, float purchasePrice) {
         if (purchasePrice == 0) {
             Thread.dumpStack();
         }
         return (float) plugin.getConfig().getDouble(configDataPath+".stockPerPurchasePrice."+plugin.formatPrice(purchasePrice,',',' ',false,false,false),0);
     }
     
-    public String getHelpMessage(CommandSender sender) {
+    String getHelpMessage(CommandSender sender) {
         ChatColor chatColorNormal       = ChatColor.getByChar(plugin.getConfig().getString("colors.normal","f"));
         ChatColor chatColorCommand      = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2"));
         ChatColor chatColorParameter    = ChatColor.getByChar(plugin.getConfig().getString("colors.parameter","b"));
         
         String helpMessage = chatColorNormal+String.format("\n"+getPlayerMessage("help",sender.getName())
-                ,   chatColorCommand+"/AP shop \n"+chatColorNormal
+                ,   chatColorCommand+"/AP shop [shop name]\n"+chatColorNormal
                 ,   chatColorCommand+"/AP select\n"+chatColorNormal
                 ,   chatColorCommand+"/AP select "+chatColorParameter+"shopname\n"+chatColorNormal)+"\n";
         
@@ -145,11 +124,11 @@ public class GetData {
         return helpMessage;
     }
 
-    public boolean isTradable(ItemStack stack, String shopName) {
+    boolean isTradable(ItemStack stack, String shopName) {
         return isTradable(plugin.configuration.getStackConfigPath(stack, shopName));
     }
 
-    public boolean isTradable(String materialConfigPath) {
+    private boolean isTradable(String materialConfigPath) {
         //Returns true if a stack is tradable and false if not
         if (materialConfigPath == null) {
             return false;    //Missing parameter
@@ -159,32 +138,8 @@ public class GetData {
         }
         return true;    //It's tradable! 
     }
-    
-    public boolean mainItemHasTradableSubItems(String mainMaterialName, String shopName) {
-        //loop materials in configuration -> return matching material's path
-        for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
-            String materialPath = "shops."+shopName+".materials."+materialNode;
-            if ( mainMaterialName.equalsIgnoreCase(plugin.getConfig().getString(materialPath+".mainMaterial"))) {
-                //main material matches -> check if this material is tradable 
-                if (plugin.getConfig().getBoolean(materialPath+".tradable",true)) {
-                    return true;    //This main material has at least one tradable sub material
-                }
-            }
-        }
-        return false;    //No tradable sub materials were found 
-    }
-    
-    public ItemStack getInventoryLastItemStack(CommandSender sender, Inventory inventory) {
-        ItemStack lastStack = null;
-        for (ItemStack itemStack : inventory.getContents()) {
-            if (itemStack != null) {
-                if (itemStack.getAmount()>0) { lastStack = itemStack; }
-            }
-        }
-        return lastStack;
-    }
-    
-    public int getMaximumAmountPlayerCanBuy(CommandSender sender, String materialConfigPath, String shopName) {
+        
+    int getMaximumAmountPlayerCanBuy(CommandSender sender, String materialConfigPath, String shopName) {
         //Not tradable          --> 0
         if (isTradable(materialConfigPath) == false) { return 0; }
         //No permission         --> 0
@@ -207,37 +162,11 @@ public class GetData {
         return amountPlayerCanBuy;
     }
 
-    public int getAmountToMove(ClickType clickType) {
-//        plugin.logger.info("click type: "+clickType.toString());
-//        plugin.logger.info("click name: "+clickType.name());
-//        plugin.logger.info("transaction size: "+plugin.getConfig().getInt("transactionSizePerClickType."+clickType.name()
-//                ,   plugin.getConfig().getInt("transactionSizePerClickType.default"))
-//        );
-//        plugin.logger.info("LEFT: "+plugin.getConfig().getInt("transactionSizePerClickType.LEFT",0));
-//        
+    int getAmountToMove(ClickType clickType) {
         return  plugin.getConfig().getInt("transactionSizePerClickType."+clickType.name().trim());
-//        
-////        transactionSizePerClickType:
-////            left: 1
-////            right: 4
-////            shift_left: 16
-////            shift_right: 64
-////            default: 0        
-//        
-//        if (clickType == ClickType.LEFT) {
-//            return    plugin.getConfig().getInt("transactionSizePerClickType.left");
-//        } else if (clickType == ClickType.RIGHT) {
-//            return    plugin.getConfig().getInt("transactionSizePerClickType.right");
-//        } else if (clickType == ClickType.SHIFT_LEFT) {
-//            return    plugin.getConfig().getInt("transactionSizePerClickType.shift_left");
-//        } else if (clickType == ClickType.SHIFT_RIGHT) {
-//            return    plugin.getConfig().getInt("transactionSizePerClickType.shift_right");
-//        } else {
-//            return    plugin.getConfig().getInt("transactionSizePerClickType.default");
-//        }
     }
 
-    public int getMaximumAmountPlayerCanSell(CommandSender sender, String materialConfigPath, ItemStack stack, String shopName) {
+    int getMaximumAmountPlayerCanSell(CommandSender sender, String materialConfigPath, ItemStack stack, String shopName) {
         //Not tradable             --> 0
         if (isTradable(materialConfigPath) == false) { return 0; }
         //No permission         --> 0
@@ -267,7 +196,7 @@ public class GetData {
         return amountPlayerCanSell;
     }
     
-    public String[][] getTradableSubMaterials(CommandSender sender, String shopName) {
+    String[][] getTradableSubMaterials(CommandSender sender, String shopName) {
         //Returns tradable sub materials (sorted if needed)
         //0 = main material, 1 = sub material, 2 = configuration path, 3 = purchase price, 4 = sales price, 5 = page number
         String[][]         tradableSubMaterials    = new String[10000][6];
@@ -334,7 +263,7 @@ public class GetData {
         return  false;
     }
     
-    public String[][] addPageNumbersToMaterialList(CommandSender sender, String[][] tradableSubMaterials, String shopName) {
+    private String[][] addPageNumbersToMaterialList(CommandSender sender, String[][] tradableSubMaterials, String shopName) {
         int shopItemsPerPage   =   plugin.getConfig().getInt("shops."+shopName+".shopItemsPerPage" , plugin.getConfig().getInt("shopItemsPerPage"));
         int itemNo             =   0;
         for (String[] subMaterial : tradableSubMaterials) {
@@ -355,7 +284,7 @@ public class GetData {
         return  false;
     }
 
-    public String[][] sortMaterials(CommandSender sender, String[][] tradableSubMaterials) {
+    private String[][] sortMaterials(CommandSender sender, String[][] tradableSubMaterials) {
         String sortBy = plugin.getConfig().getString("temporary.players."+sender.getName()+".shopSortOrder","");
         
         if (sortBy.equalsIgnoreCase("PP")) {    //Sort by purchase price ascending
@@ -389,7 +318,7 @@ public class GetData {
         return tradableSubMaterials;
     }
 
-    public String getShopForPlayer(HumanEntity player) {
+    String getShopForPlayer(HumanEntity player) {
         //Get the name of active shop for specific player
         String shopName = plugin.getConfig().getString("players."+player.getName()+".shopName","default");
         if (plugin.getConfig().isConfigurationSection("shops."+shopName) && 
@@ -408,24 +337,24 @@ public class GetData {
     }
 
     
-    public String getConsoleMessage(String messageId) {
+    String getConsoleMessage(String messageId) {
         String language = plugin.getConfig().getString("consoleLanguage","english");
         return plugin.getConfig().getString("languages."+language+"."+messageId);
     }
     
-    public String getPlayerMessage(String messageId, String playerName) {
+    String getPlayerMessage(String messageId, String playerName) {
         String language = plugin.getConfig().getString("players."+playerName+".language"
                 ,   plugin.getConfig().getString("defaultPlayerLanguage","english"));
         return plugin.getConfig().getString("languages."+language+"."+messageId);
     }
     
-    public List<String> getPlayerLanguageStringList(String messageId, String playerName) {
+    List<String> getPlayerLanguageStringList(String messageId, String playerName) {
         String language = plugin.getConfig().getString("players."+playerName+".language"
                 ,   plugin.getConfig().getString("defaultPlayerLanguage","english"));
         return plugin.getConfig().getStringList("languages."+language+"."+messageId);
     }
     
-    public String getAvailableShops(CommandSender sender) {
+    String getAvailableShops(CommandSender sender) {
         String shopList = "";
         for (String shopName : plugin.getConfig().getConfigurationSection("shops").getKeys(false) ) {
             if (AutoPrice.permission.has(sender, "autoprice.shops."+shopName) ) {    //Player has permission to this shop --> list it
@@ -436,7 +365,7 @@ public class GetData {
         return shopList;
     }
 
-    public String getShopTitle(CommandSender sender, String shopName) {
+    String getShopTitle(CommandSender sender, String shopName) {
         String shopTitle    = plugin.chatColorError+getPlayerMessage("shopTitle",sender.getName());
         return String.format(shopTitle,shopName);
     }

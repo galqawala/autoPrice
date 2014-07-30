@@ -1,11 +1,5 @@
 package me.tubelius.autoprice;
 
-//import java.util.ArrayList;
-//import java.util.Iterator;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.Map.Entry;
-
 import java.util.Arrays;
 
 import org.bukkit.Bukkit;
@@ -13,24 +7,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-//import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-//import org.bukkit.inventory.meta.ItemMeta;
-//import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-
-
-
-//import com.google.common.collect.Iterables;
-
-public class Commands implements CommandExecutor {
+class Commands implements CommandExecutor {
     //Pointer to the class calling this class     
     private AutoPrice plugin;        
-    public Commands(AutoPrice plugin) { this.plugin = plugin; }
+    Commands(AutoPrice plugin) { this.plugin = plugin; }
  
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -38,11 +24,11 @@ public class Commands implements CommandExecutor {
             if (args.length <= 0) {                             //No arguments at all
                 plugin.respondToSender(sender,plugin.getData.getHelpMessage(sender) );    //Throw the help to the command sender
             } else if (args[0].equalsIgnoreCase("shop") ) {     //First parameter is "shop"
-                handleShop(sender,args);                        //Process the shop command
+                openShop(sender,args);                        //Process the shop command
             } else if (args[0].equalsIgnoreCase("select") ) {   //First parameter is "select"
                 setActiveShop(sender,args);                     //List shops or select active shop
             } else if (args[0].equalsIgnoreCase("name") ) {     //First parameter is "name"
-                handleName(sender,args);                        //Call for a function to rename a material
+                renameMaterial(sender,args);                        //Call for a function to rename a material
             } else if (args[0].equalsIgnoreCase("enable") ) {   //First parameter is "enable"
                 setItemTradability(sender,args);                //Call for a function to enable the item
             } else if (args[0].equalsIgnoreCase("disable") ) {  //First parameter is "disable"
@@ -86,14 +72,15 @@ public class Commands implements CommandExecutor {
                 plugin.respondToSender(sender, String.format(plugin.getData.getPlayerMessage("selectedShop", sender.getName()),shopName) );
                 return true;    //successfully selected an active shop
             }
-        } else {  //Invalid arguments
-            ChatColor chatColorCommand      = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2") );
-            ChatColor chatColorParameter    = ChatColor.getByChar(plugin.getConfig().getString("colors.parameter","b") );
-            plugin.respondToSender(sender,plugin.chatColorError+String.format(plugin.getData.getPlayerMessage("invalidArguments"
-                    , sender.getName()),args[0],
-                    chatColorCommand+"/ap select"+plugin.chatColorError+"; "
-                    +chatColorCommand+"/ap select "+chatColorParameter+"shopname"+plugin.chatColorError));
-        }
+        } 
+//        else {  //Invalid arguments
+//            ChatColor chatColorCommand      = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2") );
+//            ChatColor chatColorParameter    = ChatColor.getByChar(plugin.getConfig().getString("colors.parameter","b") );
+//            plugin.respondToSender(sender,plugin.chatColorError+String.format(plugin.getData.getPlayerMessage("invalidArguments"
+//                    , sender.getName()),args[0],
+//                    chatColorCommand+"/ap select"+plugin.chatColorError+"; "
+//                    +chatColorCommand+"/ap select "+chatColorParameter+"shopname"+plugin.chatColorError));
+//        }
         return false;   //shop was not selected
     }
 
@@ -106,7 +93,7 @@ public class Commands implements CommandExecutor {
         return shopName.trim();
     }
 
-    public void handleName(CommandSender sender, String[] args) {
+    private void renameMaterial(CommandSender sender, String[] args) {
         if (sender instanceof Player) {     //Sender of the command is a player
             //Get colors
             ChatColor   chatColorCommand    = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2") );
@@ -140,7 +127,7 @@ public class Commands implements CommandExecutor {
         } else { plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName())); }
     }
     
-    public void handleReload(CommandSender sender) {
+    private void handleReload(CommandSender sender) {
         //handle the command to reload config
         if (!AutoPrice.permission.isEnabled() ) {    //Vault's plugin.permission hook is not enabled
             plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("noPermsCmdDisabled",sender.getName()));
@@ -156,7 +143,7 @@ public class Commands implements CommandExecutor {
         plugin.respondToSender(sender, plugin.getData.getPlayerMessage("configReloaded",sender.getName()) );
     }
     
-    public void handleSave(CommandSender sender) {
+    private void handleSave(CommandSender sender) {
         //handle the command to save configuration
         if (!AutoPrice.permission.isEnabled() ) {    //Vault's permission hook is not enabled
             plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("noPermsCmdDisabled",sender.getName()));
@@ -172,7 +159,7 @@ public class Commands implements CommandExecutor {
         plugin.respondToSender(sender, plugin.getData.getPlayerMessage("configSaved",sender.getName()) );
     }
     
-    public void setItemTradability(CommandSender sender, String[] args) {
+    private void setItemTradability(CommandSender sender, String[] args) {
         if (sender instanceof Player) {    //Sender of the command is a player
             ItemStack stackInHand = ((HumanEntity) sender).getItemInHand().clone();
             if (stackInHand.getAmount() <= 0) {
@@ -232,7 +219,7 @@ public class Commands implements CommandExecutor {
         }
     }
 
-    public void handleShop(CommandSender sender, String[] args) {
+    private void openShop(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {  //Sender of the command is a player
             plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName()));
             return;

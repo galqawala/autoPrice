@@ -3,16 +3,18 @@ package me.tubelius.autoprice;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
-public class Prices {
+class Prices {
     //Pointer to the class calling this class
     private AutoPrice plugin;    
     public Prices(AutoPrice plugin) { this.plugin = plugin; }
 
-    public float fitSalesPriceToLimits(float price, String shopName, String materialConfigPath) {
+    private float fitSalesPriceToLimits(float price, String shopName, String materialConfigPath) {
         //Get minimum price from: material or shop or global or default
-        float minimumAllowedPrice = (float) plugin.configuration.getMaterialConfigDouble(shopName, materialConfigPath, "salesPrice.minPrice");
+        float minimumAllowedPrice = (float) 
+                plugin.configuration.getMaterialConfigDouble(shopName, materialConfigPath, "salesPrice.minPrice");
         //Get maximum price from: material or shop or global or default
-        float maximumAllowedPrice = (float) plugin.configuration.getMaterialConfigDouble(shopName, materialConfigPath, "salesPrice.maxPrice");         
+        float maximumAllowedPrice = (float) 
+                plugin.configuration.getMaterialConfigDouble(shopName, materialConfigPath, "salesPrice.maxPrice");         
         //Decide which one to return
         if (price < minimumAllowedPrice) {          // New price is lower than the minimum allowed price
             return minimumAllowedPrice;             // Update the base player sales price to the minimum price
@@ -23,11 +25,13 @@ public class Prices {
         }
     }
     
-    public float fitPurchasePriceToLimits(float price, String shopName, String materialConfigPath) {
+    private float fitPurchasePriceToLimits(float price, String shopName, String materialConfigPath) {
         //Get minimum price from: material or shop or global or default
-        float minimumAllowedPrice = (float) plugin.configuration.getMaterialConfigDouble(shopName, materialConfigPath, "purchasePriceMin");
+        float minimumAllowedPrice = (float) 
+                plugin.configuration.getMaterialConfigDouble(shopName, materialConfigPath, "purchasePriceMin");
         //Get maximum price from: material or shop or global or default
-        float maximumAllowedPrice = (float) plugin.configuration.getMaterialConfigDouble(shopName, materialConfigPath, "purchasePriceMax");
+        float maximumAllowedPrice = (float) 
+                plugin.configuration.getMaterialConfigDouble(shopName, materialConfigPath, "purchasePriceMax");
         //Decide which one to return
         if (price < minimumAllowedPrice) {          // New price is lower than the minimum allowed price
             return minimumAllowedPrice;             // Update the base player Purchase price to the minimum price
@@ -38,7 +42,7 @@ public class Prices {
         }
     }
 
-    public void updateSalesPrices() {
+    void updateSalesPrices() {
         //loop all shops
         for (String shopName : plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
             // Loop all materials and make price changes (this will be called from a timer)
@@ -82,7 +86,7 @@ public class Prices {
         }
     }
 
-    public boolean shouldSalesPriceIncrease(String configDataPath, float totalStockAmount, 
+    private boolean shouldSalesPriceIncrease(String configDataPath, float totalStockAmount, 
             String shopName, float newSalesPriceIfIncreased, float currentPurchasePrice) {
         
         // Boolean to return in the end (in addition to returning the boolean we have to update number of price checks to configuration)
@@ -91,8 +95,10 @@ public class Prices {
         int priceChecksToSkipAfterTrades = 
                 plugin.configuration.getMaterialConfigInt(shopName, configDataPath, "salesPrice.priceChecksToSkipAfterTrades");
         // Check the number of price checks done since last trades
-        int priceChecksSinceLastPlayerSale  = plugin.getConfig().getInt(configDataPath + ".priceChecksSinceLastPlayerSale"  , Integer.MAX_VALUE);
-        int priceChecksSinceLastPurchase    = plugin.getConfig().getInt(configDataPath + ".priceChecksSinceLastPurchase"    , Integer.MAX_VALUE);
+        int priceChecksSinceLastPlayerSale  = 
+                plugin.getConfig().getInt(configDataPath + ".priceChecksSinceLastPlayerSale"  , Integer.MAX_VALUE);
+        int priceChecksSinceLastPurchase    = 
+                plugin.getConfig().getInt(configDataPath + ".priceChecksSinceLastPurchase"    , Integer.MAX_VALUE);
         //The purchase price the items would get if sales price was increased and they were sold
         float purchasePriceForItemsSoldAfterPriceIncrease = getNewPurchasePrice(configDataPath,shopName,newSalesPriceIfIncreased);
         //Raise?
@@ -116,7 +122,7 @@ public class Prices {
         return shouldSalesPriceIncrease;
     }
     
-    public void decreaseSalesPriceIfNeed(String configDataPath, ItemStack stack, String shopName) {
+    void decreaseSalesPriceIfNeed(String configDataPath, ItemStack stack, String shopName) {
         //Basic info
         float baseSalesPriceForPlayer   = (float) plugin.configuration.getMaterialConfigDouble(shopName, configDataPath, "salesPrice.price");
         float totalMoneyFromPlayers     = (float) plugin.getConfig().getDouble(configDataPath+".totalMoneyFromPlayers"  ,0);
@@ -129,23 +135,26 @@ public class Prices {
         } 
     }
     
-    public float getFinalPrice(Boolean getPurchasePrice, ItemStack stack, String shopName) {
+    float getFinalPrice(Boolean getPurchasePrice, ItemStack stack, String shopName) {
         //Calculate the final price for specific item Stack
         if (!plugin.getData.isTradable(stack, shopName)) { return 0; }    //Return 0 if stack is not tradable
         if (getPurchasePrice) {    //Get purchase price
             return getMinimumPurchasePrice(stack, shopName);    //Minimum price for current stocks
         } else {    //Get sales price
-            float unitPrice = (float) 
-                    plugin.configuration.getMaterialConfigDouble(shopName, plugin.configuration.getStackConfigPath(stack, shopName), "salesPrice.price");
+            float unitPrice = (float) plugin.configuration.getMaterialConfigDouble(
+                        shopName
+                    ,   plugin.configuration.getStackConfigPath(stack, shopName)
+                    ,   "salesPrice.price"
+                );
             return unitPrice * plugin.getData.getStackConditionMultiplier(stack);    //Multiply the price by the condition of the stack
         }
     }
     
-    public float getMinimumPurchasePrice(ItemStack stack, String shopName) {
+    float getMinimumPurchasePrice(ItemStack stack, String shopName) {
         return getMinimumPurchasePrice(plugin.configuration.getStackConfigPath(stack, shopName));
     }
 
-    public float getMinimumPurchasePrice(String ConfigPath) {
+    float getMinimumPurchasePrice(String ConfigPath) {
         //Total stock amount for given sub material
         
         float minimumPurchasePrice = Float.MAX_VALUE;
@@ -167,7 +176,7 @@ public class Prices {
         return minimumPurchasePrice;
     }
     
-    public float getNewPurchasePrice(String configDataPath, String shopName, float salesPriceTheMaterialIsSoldAt) {
+    float getNewPurchasePrice(String configDataPath, String shopName, float salesPriceTheMaterialIsSoldAt) {
         //Purchase price items that are sold now will get 
         float purchasePrice = (float) (salesPriceTheMaterialIsSoldAt * plugin.getConfig().getDouble("purchasePriceMultiplier",1.1));
         float minimumProfitPerUnit = (float) plugin.getConfig().getDouble("minimumProfitPerUnit");    //If missing --> get default
@@ -178,7 +187,7 @@ public class Prices {
         return roundTo2Decimals(purchasePrice);
     }
     
-    public float roundTo2Decimals(float value) {
+    private float roundTo2Decimals(float value) {
         return ((float)Math.round(value * 100)) / 100;
     }
 }

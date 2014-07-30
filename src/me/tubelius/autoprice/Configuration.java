@@ -13,10 +13,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-public class Configuration {
+class Configuration {
     //Pointer to the class calling this class
     private AutoPrice plugin;    
-    public Configuration(AutoPrice plugin) {
+    Configuration(AutoPrice plugin) {
         this.plugin = plugin;
     }
 
@@ -47,10 +47,9 @@ public class Configuration {
             plugin.saveConfig(); //Save the configuration file
         }
     }
-
     
     //Configuration node relocation/copying
-    public void moveConfigNode(String pathOld, String pathNew, boolean overwrite, boolean deleteOld) {
+    void moveConfigNode(String pathOld, String pathNew, boolean overwrite, boolean deleteOld) {
         if (pathOld == null) {
             return; //old location missing --> exit
         }
@@ -63,7 +62,7 @@ public class Configuration {
         }
         if (deleteOld) { plugin.getConfig().set(pathOld, null); }  //Delete the old node?
     }
-    public void moveConfigNodesInAllMaterials(String pathOldRelative, String pathNewRelative, boolean overwrite, boolean deleteOld) {
+    private void moveConfigNodesInAllMaterials(String pathOldRelative, String pathNewRelative, boolean overwrite, boolean deleteOld) {
         for (String shopName : plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
             for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
                 String materialPath = "shops."+shopName+".materials."+materialNode;
@@ -71,18 +70,17 @@ public class Configuration {
             }
         }
     }
-    public void moveConfigNodesInAllShops(String pathOldRelative, String pathNewRelative, boolean overwrite, boolean deleteOld) {
+    private void moveConfigNodesInAllShops(String pathOldRelative, String pathNewRelative, boolean overwrite, boolean deleteOld) {
         for (String shopName : plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
             String shopNode = "shops."+shopName;
             moveConfigNode(shopNode+"."+pathOldRelative , shopNode+"."+pathNewRelative , overwrite , deleteOld);
         }
     }
-    public void moveConfigNodesOnAllLevels(String pathOldRelative, String pathNewRelative, boolean overwrite, boolean deleteOld) {
+    private void moveConfigNodesOnAllLevels(String pathOldRelative, String pathNewRelative, boolean overwrite, boolean deleteOld) {
         moveConfigNodesInAllMaterials(pathOldRelative, pathNewRelative, overwrite, deleteOld);
         moveConfigNodesInAllShops(pathOldRelative, pathNewRelative, overwrite, deleteOld);
         moveConfigNode(pathOldRelative, pathNewRelative, overwrite, deleteOld);
     }
-    
     
     private void upgradeSubMaterialConfig() {
         for (String shopName : plugin.getConfig().getConfigurationSection("shops").getKeys(false)) {
@@ -98,11 +96,11 @@ public class Configuration {
                             newMaterialPath = "shops."+shopName+".materials."+newMaterialName+materialSuffix; 
                             materialSuffix += 1;
                         }
-                        plugin.getConfig().set(newMaterialPath , plugin.getConfig().getConfigurationSection(oldMaterialPath));    //Copy to new location
-                        plugin.getConfig().set(oldMaterialPath , null);                                                    //Remove old location
-                        plugin.getConfig().set(newMaterialPath+".name" , null);                                    //Remove name node (it's in path now)
-                        plugin.getConfig().set(newMaterialPath+".mainMaterial" , materialNode);                    //Add node (this info is no longer in path)
-                        plugin.getConfig().set(newMaterialPath+".subMaterial" , Integer.parseInt(subMaterial));    //Add node (this info is no longer in path)
+                        plugin.getConfig().set(newMaterialPath , plugin.getConfig().getConfigurationSection(oldMaterialPath));  //Copy to new location
+                        plugin.getConfig().set(oldMaterialPath , null);                                                         //Remove old location
+                        plugin.getConfig().set(newMaterialPath+".name" , null);                                 //Remove name node (it's in path now)
+                        plugin.getConfig().set(newMaterialPath+".mainMaterial" , materialNode);                 //Add node
+                        plugin.getConfig().set(newMaterialPath+".subMaterial" , Integer.parseInt(subMaterial)); //Add node
                     }
                 }
             }
@@ -175,7 +173,7 @@ public class Configuration {
         }
     }
     
-    public String getStackConfigPath(ItemStack stack, String shopName) {
+    String getStackConfigPath(ItemStack stack, String shopName) {
         //Get the configuration path where the data is stored for this Material or MaterialData
         //loop materials in configuration -> return matching material's path
         for (String materialNode : plugin.getConfig().getConfigurationSection("shops."+shopName+".materials").getKeys(false)) {
@@ -194,7 +192,7 @@ public class Configuration {
         return  null;
     }
     
-    public double getMaterialConfigDouble(String shopName, String materialPath, String node) {
+    double getMaterialConfigDouble(String shopName, String materialPath, String node) {
         return 
             plugin.getConfig().getDouble(materialPath+"."+node          //Primarily use material config
             ,   plugin.getConfig().getDouble("shops."+shopName+"."+node //If missing use shop config
@@ -202,7 +200,7 @@ public class Configuration {
                 )
             );
     }
-    public int getMaterialConfigInt(String shopName, String materialPath, String node) {
+    int getMaterialConfigInt(String shopName, String materialPath, String node) {
         return 
             plugin.getConfig().getInt(materialPath+"."+node             //Primarily use material config
             ,   plugin.getConfig().getInt("shops."+shopName+"."+node    //If missing use shop config
@@ -210,7 +208,7 @@ public class Configuration {
                 )
             );
     }
-    public boolean getMaterialConfigBoolean(String shopName, String materialPath, String node) {
+    private boolean getMaterialConfigBoolean(String shopName, String materialPath, String node) {
         return 
             plugin.getConfig().getBoolean(materialPath+"."+node          //Primarily use material config
             ,   plugin.getConfig().getBoolean("shops."+shopName+"."+node //If missing use shop config
