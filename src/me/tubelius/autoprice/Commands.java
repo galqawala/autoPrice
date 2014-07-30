@@ -55,10 +55,10 @@ public class Commands implements CommandExecutor {
         return true;            //Completed successfully
     }
     
-    private void setActiveShop(CommandSender sender, String[] args) {
+    private boolean setActiveShop(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {  //Sender of the command is a player
             plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName()));
-            return;
+            return false;   //shop was not selected
         }
         //List shops or select active shop
         if (args.length == 1) { //No arguments for this command --> list shops
@@ -76,6 +76,7 @@ public class Commands implements CommandExecutor {
             } else {    //All OK --> select it
                 plugin.getConfig().set("players."+sender.getName()+".shopName",args[1]);
                 plugin.respondToSender(sender, String.format(plugin.getData.getPlayerMessage("selectedShop", sender.getName()),args[1]) );
+                return true;    //successfully selected an active shop
             }
         } else {  //Invalid arguments
             ChatColor chatColorCommand      = ChatColor.getByChar(plugin.getConfig().getString("colors.command","2") );
@@ -85,6 +86,7 @@ public class Commands implements CommandExecutor {
                     chatColorCommand+"/ap select"+plugin.chatColorError+"; "
                     +chatColorCommand+"/ap select "+chatColorParameter+"shopname"+plugin.chatColorError));
         }
+        return false;   //shop was not selected
     }
 
     public void handleName(CommandSender sender, String[] args) {
@@ -217,6 +219,11 @@ public class Commands implements CommandExecutor {
         if (!(sender instanceof Player)) {  //Sender of the command is a player
             plugin.respondToSender(sender,plugin.chatColorError+plugin.getData.getPlayerMessage("ingameCmdOnly",sender.getName()));
             return;
+        }
+        if (args.length == 2) { //shop name was defined, try selecting it
+            if (!setActiveShop(sender,args)) {
+                return; //failed to select a shop
+            }
         }
         String shopName         = plugin.getData.getShopForPlayer((HumanEntity) sender);
         Inventory shopInventory = Bukkit.createInventory((InventoryHolder) sender, 6*9, "AutoPrice shop: "+shopName);
