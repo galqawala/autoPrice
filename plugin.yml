@@ -1,6 +1,6 @@
 name: AutoPrice
 main: me.tubelius.autoprice.AutoPrice
-version: 4.078
+version: 4.079
 description: AutoPrice is a plugin that lets players sell/buy items to/from server. AP utilizes easy-to-use GUI and has dynamic prices that adjust based on supply and demand. Sales prices will increase when there's no/low stock and decrease when server is losing money. Purchase price is always slightly higher than the price used to sell it originally. You can either go with the default config and get right on using the plugin or refine all the available configurations.
 commands:
   ap:
