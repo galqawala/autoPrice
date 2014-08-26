@@ -76,13 +76,13 @@ public class AutoPrice extends JavaPlugin implements Listener {      // NO_UCD (
         this.logger.info( String.format(getData.getConsoleMessage("loaded"),getDescription().getName(),getDescription().getVersion()));
     }
 
-    @SuppressWarnings("deprecation")
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) { // NO_UCD (unused code)
         if (event.getInventory()    == null) { return; }    //Player clicked outside inventory --> quit
         if (event.getCurrentItem()  == null) { return; }    //Player clicked outside inventory --> quit
         
         String shopName    = getData.getShopForPlayer(event.getWhoClicked());   //Get shop name for specific player
+        
         if (event.getInventory().getName().equalsIgnoreCase(getData.getShopTitle((CommandSender) event.getWhoClicked(),shopName))) {
             //Player is in shop
             event.setCancelled(true);                                               //Don't let player move anything while in shop
@@ -98,7 +98,7 @@ public class AutoPrice extends JavaPlugin implements Listener {      // NO_UCD (
                 trade.processPlayerSales(event, shopName);    //Player selling
             }
             trade.setShopInfoOnStacks(event.getInventory(),true,true,shopName,(CommandSender) event.getWhoClicked());    //Add lores
-            ((Player) event.getWhoClicked()).updateInventory();
+//            ((Player) event.getWhoClicked()).updateInventory();
         } 
     }   
 

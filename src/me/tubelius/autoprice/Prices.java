@@ -52,7 +52,7 @@ class Prices {
                 //Ran out of materials? --> next shop
                 if (subMaterial[2] == null) { break; }
                 //Enough players for a price change?
-                if (Bukkit.getServer().getOnlinePlayers().size() >= 
+                if (Bukkit.getServer().getOnlinePlayers().length >= 
                         plugin.configuration.getMaterialConfigInt(shopName, subMaterial[2], "salesPrice.playersRequiredForPriceChange")) {
                     
                     updateMaterialSalesPrice(subMaterial, shopName);
