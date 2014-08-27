@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="H:/googleDrive/gitHub/autoPrice/Vault-1.4.1.jar"/>
 	<classpathentry kind="lib" path="H:/googleDrive/gitHub/autoPrice/bukkit-1.7.2-R0.3.jar"/>
+	<classpathentry kind="lib" path="H:/googleDrive/gitHub/autoPrice/Vault-1.4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
