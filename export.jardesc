@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="H:/FES_Test/plugins/autoPrice.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/AutoPrice/export.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="/AutoPrice/manifest" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="true">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/AutoPrice/.gitattributes"/>
+        <file path="/AutoPrice/README.md"/>
+        <file path="/AutoPrice/.project"/>
+        <file path="/AutoPrice/plugin.yml"/>
+        <file path="/AutoPrice/.classpath"/>
+        <file path="/AutoPrice/config.yml"/>
+        <javaElement handleIdentifier="=AutoPrice/src"/>
+    </selectedElements>
+</jardesc>
